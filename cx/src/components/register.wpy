@@ -4,12 +4,13 @@
 <view class="page">
 <view class="weui-cells__title">表单</view>
 <view class="weui-cells weui-cells_after-title">
+    <form class="head-form" bindsubmit="formSubmit">
     <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
             <view class="weui-label">公司</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入公司名称"/>
+            <input class="weui-input"  v-model="company"  placeholder="请输入公司名称"/>
         </view>
     </view>
    <view class="weui-cell weui-cell_input">
@@ -17,7 +18,7 @@
             <view class="weui-label">姓名</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入你的姓名"/>
+            <input class="weui-input" name="name" placeholder="请输入你的姓名"/>
         </view>
     </view>
     <view class="weui-cell weui-cell_input weui-cell_vcode">
@@ -25,19 +26,19 @@
             <view class="weui-label">手机</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" type="digit" maxlength="11" placeholder="请输入手机号" />
+            <input class="weui-input" bindinput="inputeidt" name="phone" type="number" maxlength="11" placeholder="请输入手机号" />
         </view>
         <view class="weui-cell__ft">
-            <view class="weui-vcode-btn">获取验证码</view>
+          <view class="weui-vcode-btn" @tap="getVerifyCode()">获取验证码</view>
         </view>
     </view>
     
     <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__hd">
-            <view class="weui-label">验证码</view>
+            <view class="weui-label" >验证码</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" maxlength="6" placeholder="请输入6位验证码" />
+            <input class="weui-input" name="verifyCode" maxlength="6" placeholder="请输入6位验证码" />
         </view>
     </view>
         <view class="weui-cell weui-cell_input">
@@ -45,12 +46,12 @@
             <view class="weui-label">密码</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" type="password" placeholder="请输入密码"/>
+            <input class="weui-input" name="password" type="password" placeholder="请输入密码"/>
         </view>
     </view>
-
-    
-
+    <button formType="submit" class="weui-btn" type="primary" >注册</button>
+     </form>  
+   
 </view>
 <view class="weui-cells__tips">填写错误信息</view>
 
@@ -59,33 +60,6 @@
 </view>
 </template>
 
-<script>
-import wepy from 'wepy'
+<script lang="typescript" src="./register.ts">
 
-export default class Resiter extends wepy.component {
-  props = {
-    num: {
-      type: [Number, String],
-      coerce: function(v) {
-        return +v
-      },
-      default: 50
-    }
-  };
-
-  data = {
-    dialogShow: false,
-    buttons: [{ text: '取消' }, { text: '确定' }]
-  };
-  onShow() {
-    this.setData({
-      dialogShow: true
-    })
-  }
-
-  events = {};
-  watch = {};
-
-  methods = {};
-}
 </script>
