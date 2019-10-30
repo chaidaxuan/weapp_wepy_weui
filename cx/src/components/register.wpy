@@ -10,7 +10,7 @@
             <view class="weui-label">公司</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input"  v-model="company"  placeholder="请输入公司名称"/>
+            <input class="weui-input"  placeholder="请输入公司名称"/>
         </view>
     </view>
    <view class="weui-cell weui-cell_input">
@@ -18,7 +18,7 @@
             <view class="weui-label">姓名</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" name="name" placeholder="请输入你的姓名"/>
+            <input class="weui-input" placeholder="请输入你的姓名"/>
         </view>
     </view>
     <view class="weui-cell weui-cell_input weui-cell_vcode">
@@ -26,10 +26,10 @@
             <view class="weui-label">手机</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" bindinput="inputeidt" name="phone" type="number" maxlength="11" placeholder="请输入手机号" />
+            <input class="weui-input" value="{{phone}}"  @input="typing('phone')" type="number" maxlength="11" placeholder="请输入手机号" />
         </view>
         <view class="weui-cell__ft">
-          <view class="weui-vcode-btn" @tap="getVerifyCode()">获取验证码</view>
+          <view class="weui-vcode-btn" @tap="verify">{{btnText}}</view>
         </view>
     </view>
     

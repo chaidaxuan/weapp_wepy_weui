@@ -23,6 +23,4 @@
   </view>
 </template>
 
-<script lang="typescript" src="./index.ts">
-
-</script>
+<script lang="typescript" src="./index.ts"></script>
