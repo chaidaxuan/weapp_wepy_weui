@@ -34,7 +34,7 @@ export interface IBlob {
 export class ApiService {
     constructor(private http: HttpClient) {
         /* expose this instance to window for changing apiBase */
-        window['eddie'] = this;
+        // window['eddie'] = this;
     }
 
     private readonly API_BASE_KEY = 'paula_api_base';
