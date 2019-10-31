@@ -23,7 +23,7 @@ export default class RegisterComponent extends wepy.component {
 
     methods = {
         formSubmit(e) {
-            console.log(e)
+
         },
         getVerifyCode() {
         },

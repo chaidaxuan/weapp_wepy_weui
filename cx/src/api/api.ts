@@ -33,33 +33,33 @@ export interface IBlob {
 
 export class ApiService {
     constructor(private http: HttpClient) {
-        /* expose this instance to window for changing apiBase */
-        // window['eddie'] = this;
+        /* expose this instance to (wx as any) for changing apiBase */
+        (wx as any)['eddie'] = this;
     }
 
     private readonly API_BASE_KEY = 'paula_api_base';
     private readonly API_CREDENTIAL_KEY = 'paula_credential';
 
     get apiBase(): string {
-        return window.localStorage.getItem(this.API_BASE_KEY) ||
-            (window.location.origin + '/api');
+        return (wx as any).localStorage.getItem(this.API_BASE_KEY) ||
+            ((wx as any).location.origin + '/api');
     }
 
     set apiBase(base: string) {
-        window.localStorage.setItem(this.API_BASE_KEY, base);
+        (wx as any).localStorage.setItem(this.API_BASE_KEY, base);
     }
 
     get credential(): { uid: number, token: string } {
         try {
             const { uid = 0, token = '' } =
-                JSON.parse(window.localStorage.getItem(this.API_CREDENTIAL_KEY));
+                JSON.parse((wx as any).localStorage.getItem(this.API_CREDENTIAL_KEY));
             return { uid, token };
         } catch (e) {
             return { uid: 0, token: '' };
         }
     }
     set credential({ uid, token }) {
-        window.localStorage.setItem(
+        (wx as any).localStorage.setItem(
             this.API_CREDENTIAL_KEY, JSON.stringify({ uid, token }));
     }
 
@@ -147,20 +147,20 @@ export function PromptDownloadFile(blob: Blob, filename: string) {
 
     // IE doesn't allow using a blob object directly as link href
     // instead it is necessary to use msSaveOrOpenBlob
-    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-        window.navigator.msSaveOrOpenBlob(blob);
+    if ((wx as any).navigator && window.navigator.msSaveOrOpenBlob) {
+        (wx as any).navigator.msSaveOrOpenBlob(blob);
         return;
     }
 
     // For other browsers: 
     // Create a link pointing to the ObjectURL containing the blob.
-    const data = window.URL.createObjectURL(blob);
+    const data = (wx as any).URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = data;
     link.download = filename;
     link.click();
     setTimeout(() => {
         // For Firefox it is necessary to delay revoking the ObjectURL
-        window.URL.revokeObjectURL(data);
+        (wx as any).URL.revokeObjectURL(data);
     }, 100);
 }

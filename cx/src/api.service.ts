@@ -14,6 +14,7 @@ import { ApiDesign } from './api/endpoint/project/design';
 import { ApiDelivery } from './api/endpoint/project/delivery';
 import { ApiProduction } from './api/endpoint/project/production';
 import { ApiProjectUser } from './api/endpoint/project/projectuser';
+import { HttpClient } from './http';
 
 /**
  * Example
@@ -47,7 +48,7 @@ class APIConstructor {
 
 }
 
-const apiService = new ApiService(null/*todo*/);
+const apiService = new ApiService(new HttpClient());
 const apiAuth = new ApiAuth(apiService);
 const apiProject = new ApiProject(
   apiService,

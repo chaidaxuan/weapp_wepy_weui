@@ -29,7 +29,11 @@
             <input class="weui-input" value="{{phone}}"  @input="typing('phone')" type="number" maxlength="11" placeholder="请输入手机号" />
         </view>
         <view class="weui-cell__ft">
-          <view class="weui-vcode-btn" @tap="verify">{{btnText}}</view>
+             <!-- <view class="weui-label reset-label-right">
+              <view @tap="verify" class="weui-btn mini-btn"  size="mini">{{btnText}}</view>
+              
+            </view> -->
+             <view @tap="verify" class="weui-vcode-btn">{{btnText}}</view>
         </view>
     </view>
     
