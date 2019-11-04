@@ -4,7 +4,7 @@ import 'wepy-async-function'
 export default class extends wepy.app {
     config = {
         pages: [
-            'pages/index'
+            'pages/index',
         ],
         window: {
             backgroundTextStyle: 'light',

@@ -17,17 +17,17 @@
     "author": "chaixuan",
     "license": "MIT",
     "dependencies": {
-        "@angular/core": "^8.2.12",
+        "@angular/core": "^8.2.13",
         "@types/wepy": "^1.7.5",
         "@wepy/cli": "^2.0.0-alpha.17",
         "@wepy/core": "^2.0.0-alpha",
         "miniprogram-api-typings": "^2.9.0",
         "rxjs": "^6.5.3",
-        "wepy": "^1.6.0",
+        "wepy": "^1.7.2",
         "wepy-async-function": "^1.4.4",
         "wepy-com-toast": "^1.0.2",
         "weui-miniprogram": "^0.1.12",
-        "weui-wxss": "^2.0.0"
+        "weui-wxss": "^2.0.1"
     },
     "devDependencies": {
         "babel-eslint": "^7.2.1",

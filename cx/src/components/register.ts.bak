@@ -1,11 +1,9 @@
 import wepy from "wepy"
-import base from "../mixins/base"
 import { API } from "../api.service"
 import 'wepy-async-function'
-export default class RegisterComponent extends wepy.component {
+export default class RegisterComponent extends wepy.page {
     api = API;
 
-    mixins = [base]
     data = {
         phone: '',
         password: '',
@@ -13,7 +11,9 @@ export default class RegisterComponent extends wepy.component {
         loading: false,
         timer: null,
         time: 0,
+
     };
+    // that = this;
 
     computed = {
         btnText() {
@@ -23,7 +23,13 @@ export default class RegisterComponent extends wepy.component {
 
     methods = {
         formSubmit(e) {
-
+            console.log(e)
+            this.api.Auth.Register(e.detail.phone, e.detail.name, e.detail.password, e.detail.company, e.detail.verifyCode).then(iSuccess => {
+                console.log('iSuccess')
+            }).catch(() => {
+                console.log('iFailure')
+                // this.$alert('温馨提示', '请填写正确的手机号码');
+            })
         },
         getVerifyCode() {
         },
