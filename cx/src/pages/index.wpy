@@ -1,7 +1,7 @@
 <style lang="css">
-page{
+/* page{
     text-align: center;
-}
+} */
 button[size="mini"] {
   font-size: 48rpx !important;
   padding: 0 1.4em;
@@ -25,7 +25,7 @@ button {
 
 .iconfont {
   font-family: "iconfont" !important;
-  font-size: 48x;
+  font-size: 48rpx;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -41,8 +41,7 @@ button {
 </style>
 <template>
 <view>
-  <Register></Register>
-<button class="weui-btn mini-btn" type="primary" size="mini"> <text class="iconfont icon-iphone" @tap="toLogin">立即登录</text></button>
+<button class="weui-btn mini-btn" type="primary" size="mini" @tap="toLogin"> <text class="iconfont icon-iphone" >立即登录</text></button>
 </view>
 </template>
 <script lang="typescript" src="./index.ts">

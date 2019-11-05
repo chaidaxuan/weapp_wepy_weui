@@ -4,11 +4,10 @@ import event from "wepy/event";
 import { API } from "../api.service";
 import 'wepy-async-function';
 
-export default class Register extends wepy.component {
+export default class pageRegister extends wepy.page {
     api = API;
-
     config = {
-        navigationBarTitleText: "注册页面",
+        navigationBarTitleText: "注册",
     }
 
     data = {
@@ -42,7 +41,6 @@ export default class Register extends wepy.component {
         },
         typing: ((type: string, evt?: any) => {
             this[type] = evt.detail.value
-            console.log(this.phone)
         }) as any,
         verify(evt?: event) {
             console.log('verify')
@@ -50,24 +48,24 @@ export default class Register extends wepy.component {
             // if (!this.isPhone(this.phone)) {
             //     return this.$alert('温馨提示', '请填写正确的手机号码')
             // }
-            this.timing(10);
+            this.timing(60)
+            // this.time = 3
+            let timer = setInterval(() => {
+                if (this.time > 0) {
+                    this.time--
+                    console.log(this.time)
+                } else {
+                    clearInterval(timer)
+                }
+
+            }, 1000)
+
             this.api.Auth.GetVerifyCode(this.data.phone).then(iSuccess => {
                 console.log('iSuccess')
             }).catch(() => {
                 console.log('iFailure')
             });
         },
-
-
     }
 
-    timing(time: number) {
-        console.log('timing')
-        this.time = time;
-        this.timer = setTimeout(() => {
-            if (time > 0) {
-                this.timing(time - 1)
-            }
-        }, 1000)
-    }
 }

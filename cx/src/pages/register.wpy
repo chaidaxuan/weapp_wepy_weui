@@ -29,10 +29,6 @@
             <input class="weui-input" value="{{phone}}" name="phone"  @input="typing('phone')" type="number" maxlength="11" placeholder="请输入手机号" />
         </view>
         <view class="weui-cell__ft">
-             <!-- <view class="weui-label reset-label-right">
-              <view @tap="verify" class="weui-btn mini-btn"  size="mini">{{btnText}}</view>
-              
-            </view> -->
              <view @tap="verify" class="weui-vcode-btn">{{btnText}}</view>
         </view>
     </view>
@@ -59,6 +55,5 @@
 </view>
 </view>
 </template>
-
-
-<script lang="typescript" src="./register.ts"></script>
+<script lang="typescript" src="./register.ts">
+</script>
