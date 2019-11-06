@@ -18,7 +18,7 @@ export default class pageIndex extends wepy.page {
             // wepy.navigateTo({ url: '/pages/register' });
             // this.$navigate('/pages/register');
             this.$route('navigateTo', '/pages/login');
-            console.log('login1')
+            console.log('login11')
         }
     }
 }

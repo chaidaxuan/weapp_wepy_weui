@@ -1,0 +1,8 @@
+<style lang="less">
+</style>
+<template>
+    <view>111</view>
+</template>
+<script lang="typescript" src="./homePage.ts">
+
+</script>

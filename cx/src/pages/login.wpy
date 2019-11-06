@@ -15,7 +15,7 @@
                             <view class="weui-label">手机</view>
                         </view>
                         <view class="weui-cell__bd">
-                            <input class="weui-input" value="{{phone}}" name="phone" @input="typing('phone')" type="number" maxlength="11" placeholder="请输入手机号">
+                            <input class="weui-input" value="{{phone}}" name="phone" @input="typing('phone')" type="number" maxlength="11" placeholder="请输入手机号"/>
                         </view>
                     </view>
                     <view class="weui-cell weui-cell_input">
@@ -23,14 +23,14 @@
                             <view class="weui-label">密码</view>
                         </view>
                         <view class="weui-cell__bd">
-                            <input class="weui-input" name="password" type="password" placeholder="请输入密码">
+                            <input class="weui-input" name="password" type="password" placeholder="请输入密码"/>
                         </view>
                     </view>
                     <button formType="submit" class="weui-btn" type="primary">登录</button>
                 </form>
             </view>
-            <a class="weui-btn mini-btn login-btn" type="primary" size="mini">注册</a>
-            <a class="weui-btn mini-btn login-btn" type="primary" size="mini">忘记密码</a>
+            <button class="weui-btn mini-btn login-btn" @tap="toRegister" type="primary" size="mini">注册</button>
+            <button class="weui-btn mini-btn login-btn" @tap="toResetPassword" type="primary" size="mini">忘记密码</button>
         </view>
     </view>
 </template>

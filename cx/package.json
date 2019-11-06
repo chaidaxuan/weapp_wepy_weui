@@ -26,6 +26,7 @@
         "wepy": "^1.7.2",
         "wepy-async-function": "^1.4.4",
         "wepy-com-toast": "^1.0.2",
+        "wepy-compiler-ts": "0.0.3",
         "weui-miniprogram": "^0.1.12",
         "weui-wxss": "^2.0.1"
     },

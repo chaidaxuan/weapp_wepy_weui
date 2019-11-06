@@ -1,7 +1,7 @@
 import wepy from "wepy";
 import event from "wepy/event";
 
-import { API } from "../api.service";
+import { API, TUserStatus, IFailure } from "../api.service";
 import 'wepy-async-function';
 
 export default class pageRegister extends wepy.page {
@@ -26,12 +26,23 @@ export default class pageRegister extends wepy.page {
         }
     }
 
+    onShow() {
+        this.api.Auth.IsLoggedIn().then(iSuccess => {
+            if (iSuccess.Result.Status === TUserStatus.STATUS_NORMAL) {
+                //   this.router.navigate(['index']);
+                // this.$route('navigateTo', '/pages/homePage');
+            }
+        }).catch((iFailure: IFailure) => {
+            this.api.log('login/ngOnInit', iFailure);
+        });
+    }
     methods = {
         login(evt?: event) {
             const e = evt as any;
             console.log(e);
-            this.api.Auth.Login(e.detail.phone, e.detail.password).then(iSuccess => {
+            this.api.Auth.Login(e.detail.value.phone, e.detail.value.password).then(iSuccess => {
                 console.log('iSuccess')
+                this.$route('navigateTo', '/pages/login');
             }).catch(() => {
                 console.log('iFailure')
                 // this.$alert('温馨提示', '请填写正确的手机号码');
@@ -42,6 +53,12 @@ export default class pageRegister extends wepy.page {
             this[type] = evt.detail.value
         }) as any,
 
+        toRegister() {
+            this.$route('navigateTo', '/pages/register');
+        },
+        toResetPassword() {
+            this.$route('navigateTo', '/pages/forgetPassword', { phone: 18521519605 });
+        }
     }
 
 }
