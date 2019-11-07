@@ -45,4 +45,5 @@ button {
 </view>
 </template>
 <script lang="typescript" src="./index.ts">
+// 当 lang="typescript" 时，编译后的 js 文件中缺少执行 Page() 代码
 </script>

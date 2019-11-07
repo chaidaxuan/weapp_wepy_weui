@@ -1,7 +1,7 @@
 import wepy from "wepy";
 import event from "wepy/event";
 
-import { API, TUserStatus, IFailure } from "../api.service";
+import { API, TUserStatus, IFailure } from "../../api.service";
 import 'wepy-async-function';
 
 export default class pageRegister extends wepy.page {

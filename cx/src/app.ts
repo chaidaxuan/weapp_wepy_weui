@@ -2,6 +2,10 @@ import wepy from 'wepy'
 import 'wepy-async-function'
 
 export default class extends wepy.app {
+    constructor() {
+        super();
+        this.use('promisify');
+    }
     config = {
         pages: [
             'pages/index',
