@@ -1,0 +1,79 @@
+<style lang="less">
+
+.page-user{
+
+  // @userinfoHeight: 100rpx;
+  // 8rpx: 8rpx;
+
+  .userinfo{
+    padding: 20rpx 0;
+  }
+
+  .userinfo-avatar {
+    float: left;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+  }
+
+  // space + space
+  .userinfo-info {
+    float: left;          
+    line-height: 1;
+    padding: 8rpx 0;
+    margin-left: 3 * 8rpx;
+  }
+
+  // text + space + text
+  .userinfo-nickname {
+    color: #5cbaa7;
+    font-size: (100 - 4 * 8) * (16 / 30)rpx;
+    margin-bottom: 2 * 8rpx;
+  }
+  .userinfo-status {
+    color: #999;
+    font-size: (100 - 4 * 8) * (14 / 30)rpx;
+
+  }
+}
+</style>
+
+<template>
+  <view class="page-user">
+    <view class="weui-panel">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd userinfo clearfix">
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"/>
+            <view class="userinfo-info">
+              <view class="userinfo-nickname">姓名:{{userInfo.nickName}}</view>
+              <view class="userinfo-status">身份:{{role}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-cells weui-cells_after-title">
+        <navigator url="/pages/auth/modifyInfo" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">修改公司姓名</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">
+          </view>
+        </navigator>
+        <navigator url="/pages/auth/resetPassword" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">修改密码</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+          </view>
+        </navigator>
+        <navigator url="/pages/auth/logout" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">退出</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</template>
+<script lang="typescript" src="./user.ts">
+// 当 lang="typescript" 时，编译后的 js 文件中缺少执行 Page() 代码
+</script>

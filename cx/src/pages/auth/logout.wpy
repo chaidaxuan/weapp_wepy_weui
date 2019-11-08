@@ -1,0 +1,13 @@
+<style lang="less">
+</style>
+<template>
+<view class="page">
+<view class="weui-cells weui-cells_after-title">
+正在注销
+</view>
+</view>
+</template>
+
+<script lang="typescript" src="./logout.ts">
+
+</script> 

@@ -42,7 +42,9 @@ export default class pageRegister extends wepy.page {
             console.log(e);
             this.api.Auth.Login(e.detail.value.phone, e.detail.value.password).then(iSuccess => {
                 console.log('iSuccess')
-                this.$route('navigateTo', '/pages/login');
+                this.$route('navigateTo', '/pages/auth/user');
+                var toDoUrl = 'pages/project-management/projectList';
+                wepy.switchTab({ url: toDoUrl })
             }).catch(() => {
                 console.log('iFailure')
                 // this.$alert('温馨提示', '请填写正确的手机号码');

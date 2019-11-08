@@ -12,9 +12,16 @@ export default class extends wepy.app {
             'pages/register',
             'pages/login',
             'pages/forgetPassword',
+
+            'pages/auth/modifyInfo',
+            'pages/auth/resetPassword',
+            'pages/auth/logout',
+
             'pages/homePage',
 
-            'pages/project-management/projectList'
+            'pages/project-management/projectList',
+
+            'pages/auth/user'
         ],
         window: {
             backgroundTextStyle: 'light',
@@ -44,7 +51,7 @@ export default class extends wepy.app {
                 "text": "用户"
             },
             {
-                "pagePath": "pages/login",
+                "pagePath": "pages/auth/user",
                 "iconPath": "image/icon_component.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "我的"
