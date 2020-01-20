@@ -38,17 +38,19 @@ export default class pageRegister extends wepy.page {
     }
     methods = {
         login(evt?: event) {
-            const e = evt as any;
-            console.log(e);
-            this.api.Auth.Login(e.detail.value.phone, e.detail.value.password).then(iSuccess => {
-                console.log('iSuccess')
-                this.$route('navigateTo', '/pages/auth/user');
-                var toDoUrl = 'pages/project-management/projectList';
-                wepy.switchTab({ url: toDoUrl })
-            }).catch(() => {
-                console.log('iFailure')
-                // this.$alert('温馨提示', '请填写正确的手机号码');
-            })
+            console.log('111111')
+            // const e = evt as any;
+            // console.log(e);
+            // this.api.Auth.Login(e.detail.value.phone, e.detail.value.password).then(iSuccess => {
+
+            //     console.log('iSuccess')
+            //     this.$route('navigateTo', '/pages/auth/user');
+            //     // let toDoUrl = 'pages/project-management/projectList';
+            //     // wepy.switchTab({ url: toDoUrl })
+            // }).catch(() => {
+            //     console.log('iFailure')
+            //     this.$alert('温馨提示', '请填写正确的手机号码');
+            // })
         },
 
         typing: ((type: string, evt?: any) => {

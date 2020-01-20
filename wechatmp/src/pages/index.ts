@@ -15,10 +15,7 @@ export default class pageIndex extends wepy.page {
 
     methods = {
         toLogin: ($evt?: event) => {
-            // wepy.navigateTo({ url: '/pages/register' });
-            // this.$navigate('/pages/register');
-            this.$route('navigateTo', '/pages/login');
-            console.log('login11')
+            this.$route('navigateTo', '/pages/auth/resetPassword');
         }
     }
 }

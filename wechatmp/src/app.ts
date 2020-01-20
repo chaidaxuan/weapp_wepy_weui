@@ -9,15 +9,12 @@ export default class extends wepy.app {
     config = {
         pages: [
             'pages/index',
-            'pages/register',
-            'pages/login',
-            'pages/forgetPassword',
+            'pages/homePage',
 
             'pages/auth/modifyInfo',
             'pages/auth/resetPassword',
             'pages/auth/logout',
-
-            'pages/homePage',
+            'pages/auth/login',
 
             'pages/project-management/projectList',
 
@@ -36,23 +33,23 @@ export default class extends wepy.app {
             borderStyle: 'black',
             "list": [{
                 "pagePath": "pages/index",
-                "iconPath": "image/icon_component.png",
+                "iconPath": "image/homepage.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "首页"
             }, {
                 "pagePath": "pages/project-management/projectList",
-                "iconPath": "image/icon_component.png",
+                "iconPath": "image/project.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "项目"
             }, {
-                "pagePath": "pages/forgetPassword",
-                "iconPath": "image/icon_component.png",
+                "pagePath": "pages/project-management/projectList",
+                "iconPath": "image/user.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "用户"
             },
             {
                 "pagePath": "pages/auth/user",
-                "iconPath": "image/icon_component.png",
+                "iconPath": "image/self.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "我的"
             }]
