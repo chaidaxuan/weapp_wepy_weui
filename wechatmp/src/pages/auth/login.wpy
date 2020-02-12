@@ -7,7 +7,7 @@
 <template>
     <view class="page-draw">
         <view class="page">
-            <view class="weui-cells__title">表单</view>
+            <view class="weui-cells__title">登录</view>
             <view class="weui-cells weui-cells_after-title">
                 <form
                     class="head-form"

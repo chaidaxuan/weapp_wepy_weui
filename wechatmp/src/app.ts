@@ -18,13 +18,15 @@ export default class extends wepy.app {
 
             'pages/project-management/projectList',
 
+            'pages/scan-management/scan',
+
             'pages/auth/user'
         ],
         window: {
             backgroundTextStyle: 'light',
-            navigationBarBackgroundColor: '#fff',
+            navigationBarBackgroundColor: '#049BFF',
             navigationBarTitleText: 'WeChat',
-            navigationBarTextStyle: 'black'
+            navigationBarTextStyle: 'white'
         },
         tabBar: {
             color: '#AEADAD',
@@ -41,11 +43,6 @@ export default class extends wepy.app {
                 "iconPath": "image/project.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "项目"
-            }, {
-                "pagePath": "pages/project-management/projectList",
-                "iconPath": "image/user.png",
-                "selectedIconPath": "image/icon_component_HL.png",
-                "text": "用户"
             },
             {
                 "pagePath": "pages/auth/user",

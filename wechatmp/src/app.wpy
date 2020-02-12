@@ -1,6 +1,9 @@
 <style lang="less">
 @import 'style/weui.less';
-// @import 'style/weui/index.less';
-// @import 'style/custom/index.less';
+.green-btn {
+  background-color: #049bff;
+  color: #fff;
+  margin-bottom: 40rpx;
+}
 </style>
 <script src="./app.ts" lang="typescript"></script>
