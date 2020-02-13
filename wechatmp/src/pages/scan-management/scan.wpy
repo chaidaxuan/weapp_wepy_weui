@@ -83,51 +83,42 @@ view {
 }
 </style>
 <template>
-    <block>
-        <camera
-            device-position="back"
-            mode="scanCode"
-            flash="off"
-            bindscancode="takeCode"
-            binderror="error"
-            style="width: 100%; height: 300px;"
-        ></camera>
-        <view>
-            <button
-                class="green-btn weui-btn"
-                @tap="backTo"
-            >结束扫码/调整扫码速度</button>
-        </view>
+  <block>
+    <camera
+      device-position="back"
+      mode="scanCode"
+      flash="off"
+      bindscancode="takeCode"
+      binderror="error"
+      style="width: 100%; height: 400rpx;"
+    ></camera>
+    <view>
+      <button
+        class="green-btn weui-btn"
+        @tap="backTo"
+      >结束扫码/调整扫码速度</button>
+    </view>
 
-        <block wx:if="{{isShowInput}}">
-            <view class='toast-box'>
-                <view class='toastbg'></view>
-                <view class='showToast'>
-                    <view class='toast-title'>
-                        <text>确认支付</text>
-                    </view>
-                    <view class='toast-main'>
-                        <view class='toast-input'>
-                            <input
-                                type='password'
-                                placeholder='输入几秒扫码一次'
-                                bindinput='setValue'
-                                data-name='stuEidtName'
-                            >
-                        </view>
-                    </view>
-                    <view class='toast-button'>
-                        <view class='button1'>
-                            <button>取消</button>
-                        </view>
-                        <view class='button2'>
-                            <button>确定</button>
-                        </view>
-                    </view>
-                </view>
-            </view>
-        </block>
-    </block>
+    <modal
+      id="modal"
+      hidden="{{hiddenModalInput}}"
+      title="每次扫描的秒数(请输入正整数)"
+      confirm-text="修改"
+      cancel-text="取消"
+      bindcancel="cancel"
+      bindconfirm="confirm"
+    >
+
+      <input
+        type='number'
+        placeholder="秒数"
+        auto-focus
+        value="{{inputVal}}"
+      />
+
+    </modal>
+
+  </block>
 </template>
 <script lang="typescript" src="./scan.ts">
 </script>
