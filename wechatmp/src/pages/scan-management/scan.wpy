@@ -96,7 +96,11 @@ view {
       <button
         class="green-btn weui-btn"
         @tap="backTo"
-      >结束扫码/调整扫码速度</button>
+      >结束扫码</button>
+      <button
+        class="green-btn weui-btn"
+        @tap="scanControl"
+      >调整扫码速度</button>
     </view>
 
     <modal

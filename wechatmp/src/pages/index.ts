@@ -47,10 +47,7 @@ export default class pageIndex extends wepy.page {
         bindPickerChange: function (e) {
             console.log('picker发送选择改变，携带值为', e);
             this.currentProcessIndex = e.detail.value;
-            this.setData({
-                selectedProductionProcess: e.detail.value
-            })
-            console.log('selectedProductionProcess', this.data.selectedProductionProcess)
+            console.log('selectedProductionProcess', this.selectedProductionProcess)
         },
     }
 }

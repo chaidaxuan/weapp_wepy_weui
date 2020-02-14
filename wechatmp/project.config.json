@@ -55,6 +55,13 @@
 					"id": -1,
 					"name": "pages/scan-management/scan",
 					"pathName": "pages/scan-management/scan",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/scan-management/scan",
+					"pathName": "pages/scan-management/scan",
 					"scene": null
 				}
 			]
