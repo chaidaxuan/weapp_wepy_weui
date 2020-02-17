@@ -17,7 +17,9 @@ export default class pageIndex extends wepy.page {
     }
     data = {
         canScan: true,
-        productionProcessLabel: ['1开料', '2腐蚀', '3冲孔', '4折弯'],
+        productionProcessLabel: [
+            '1开料', '2腐蚀', '3冲孔', '4折弯', '5滚弧', '6焊接', '7打磨', '8喷涂',
+            '发货', '收货', '回退-修改生产', '回退-重新生产'],
         // productionProcessValue: [1, 2, 3, 4],
     }
     canScan: boolean = true;

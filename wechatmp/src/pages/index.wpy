@@ -62,7 +62,7 @@ view {
         range="{{productionProcessLabel}}"
         bindchange="bindPickerChange"
       >
-        <button class="green-btn weui-btn">{{currentProcess?'已选择的生产动态：'+currentProcess:'请选择生产动态进行扫码:'}}</button>
+        <button class="green-btn weui-btn">{{currentProcess?'已选择的操作：'+currentProcess:'请选择操作进行扫码:'}}</button>
       </picker>
 
       <button

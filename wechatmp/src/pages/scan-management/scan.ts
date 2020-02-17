@@ -9,6 +9,10 @@ export default class scan extends wepy.page {
         hiddenModalInput: true,
         inputVal: 10,
         scanSpeed: this.data.inputVal,
+        listData: [
+            { "code": "01", "text": "text1", "type": "type1" },
+            { "code": "02", "text": "text2", "type": "type2" },
+        ],
     }
     scanFunctionIsUseable = true;
     scanInterval = null;
@@ -41,6 +45,7 @@ export default class scan extends wepy.page {
         backTo() {
             wx.navigateBack({ delta: 1 })
             console.log('backTo');
+            this.data.listData.push({ "code": "cx", "text": "cx", "type": "cx" });
         },
         showModalInput() {
             this.data.hiddenModalInput = false;

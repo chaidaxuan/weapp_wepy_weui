@@ -81,6 +81,36 @@ view {
   border-radius: 0px;
   border-bottom-right-radius: 16rpx;
 }
+
+.table {
+  border: 0px solid darkgray;
+}
+.tr {
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+  width: 40%;
+  justify-content: center;
+  text-align: center;
+}
+.bg-w {
+  background: snow;
+}
+.bg-g {
+  background: #e6f3f9;
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #3366ff;
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
 </style>
 <template>
   <block>
@@ -97,10 +127,43 @@ view {
         class="green-btn weui-btn"
         @tap="backTo"
       >结束扫码</button>
-      <button
+      <!-- <button
         class="green-btn weui-btn"
         @tap="scanControl"
-      >调整扫码速度</button>
+      >调整扫码速度</button> -->
+
+      <view class="table">
+        <view
+          class="tr bg-w"
+          style="padding:0px;"
+        >
+          <view class="th">项目名称</view>
+          <view class="th">序号</view>
+          <view class="th ">数量</view>
+        </view>
+        <block
+          wx:for="{{listData}}"
+          wx:key="{{code}}"
+        >
+          <view
+            class="tr bg-g"
+            wx:if="{{index % 2 == 0}}"
+          >
+            <view class="td">{{item.code}}</view>
+            <view class="td">{{item.text}}</view>
+            <view class="td">{{item.type}}</view>
+          </view>
+          <view
+            class="tr"
+            wx:else
+          >
+            <view class="td">{{item.code}}</view>
+            <view class="td">{{item.text}}</view>
+            <view class="td">{{item.type}}</view>
+          </view>
+        </block>
+      </view>
+
     </view>
 
     <modal
@@ -114,7 +177,7 @@ view {
     >
 
       <input
-        type='number'
+        type="number"
         placeholder="秒数"
         auto-focus
         value="{{inputVal}}"
