@@ -141,29 +141,39 @@ view {
           <view class="th">序号</view>
           <view class="th ">数量</view>
         </view>
-        <block
-          wx:for="{{listData}}"
-          wx:key="{{code}}"
-        >
-          <view
-            class="tr bg-g"
-            wx:if="{{index % 2 == 0}}"
-          >
-            <view class="td">{{item.code}}</view>
-            <view class="td">{{item.text}}</view>
-            <view class="td">{{item.type}}</view>
-          </view>
-          <view
-            class="tr"
-            wx:else
-          >
-            <view class="td">{{item.code}}</view>
-            <view class="td">{{item.text}}</view>
-            <view class="td">{{item.type}}</view>
-          </view>
-        </block>
-      </view>
 
+        <scroll-view
+          scroll-y="true"
+          style="height: 500rpx;"
+          bindscrolltoupper="upper"
+          bindscrolltolower="lower"
+          bindscroll="scroll"
+        >
+          <block
+            wx:for="{{listData}}"
+            wx:key="{{code}}"
+          >
+            <view
+              class="tr bg-g"
+              wx:if="{{index % 2 == 0}}"
+            >
+              <view class="td">{{item.code}}</view>
+              <view class="td">{{item.text}}</view>
+              <view class="td">{{item.type}}</view>
+            </view>
+            <view
+              class="tr"
+              wx:else
+            >
+              <view class="td">{{item.code}}</view>
+              <view class="td">{{item.text}}</view>
+              <view class="td">{{item.type}}</view>
+            </view>
+          </block>
+
+        </scroll-view>
+
+      </view>
     </view>
 
     <modal
