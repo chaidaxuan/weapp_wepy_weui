@@ -49,6 +49,11 @@ view {
   color: #fff;
   margin-bottom: 40rpx;
 }
+.white-btn {
+  background-color: white;
+  color: black;
+  margin-bottom: 40rpx;
+}
 </style>
 <template>
   <view>

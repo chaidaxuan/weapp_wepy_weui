@@ -15,6 +15,13 @@ export default class pageProjectList extends wepy.page {
         sliderOffset: 0,
         sliderLeft: 0,
         sliderWidth: 1,
+        listData: [
+            { "projectName": "演示项目", "projectAccount": "test", "status": "1" },
+            { "projectName": "演示项目", "projectAccount": "test", "status": "1" },
+            { "projectName": "演示项目", "projectAccount": "test", "status": "1" },
+            { "projectName": "演示项目", "projectAccount": "test", "status": "1" },
+            { "projectName": "演示项目", "projectAccount": "test", "status": "1" },
+        ],
     }
     onLoad() {
         var that = this
@@ -23,12 +30,12 @@ export default class pageProjectList extends wepy.page {
         // 在1.4.1以下版本，wepy生成的项目默认都会加入promise polyfill,在1.4.1以后的版本，需要用户手动加入，
 
         wepy.getSystemInfo().then(
-            (iSuccess) => {
-                this.sliderWidth = iSuccess.screenWidth / 3
-                this.sliderLeft = (iSuccess.windowWidth / this.data.tabs.length - this.data.sliderWidth) / 2
-                this.sliderOffset = (iSuccess.windowWidth / this.data.tabs.length * this.data.activeIndex)
-                console.log(this.data)
-            }
+            // (iSuccess) => {
+            //     this.sliderWidth = iSuccess.screenWidth / 3
+            //     this.sliderLeft = (iSuccess.windowWidth / this.data.tabs.length - this.data.sliderWidth) / 2
+            //     this.sliderOffset = (iSuccess.windowWidth / this.data.tabs.length * this.data.activeIndex)
+            //     console.log(this.data)
+            // }
         ).catch()
 
     }
@@ -37,10 +44,10 @@ export default class pageProjectList extends wepy.page {
 
     }
     tabClick(evt?: event) {
-        const e = evt as any;
-        this.sliderOffset = e.currentTarget.offsetLeft
-        this.activeIndex = e.currentTarget.id
-        console.log(this.data)
+        // const e = evt as any;
+        // this.sliderOffset = e.currentTarget.offsetLeft
+        // this.activeIndex = e.currentTarget.id
+        // console.log(this.data)
         // this.$apply()
     }
 }

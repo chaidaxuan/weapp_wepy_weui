@@ -1,28 +1,95 @@
 <style lang="less">
-.weui-tab__content{
-    padding-top: 60rpx;
-    text-align: center;
+.weui-tab__content {
+  padding-top: 60rpx;
+  text-align: center;
+}
+view {
+  padding: 10rpx;
+}
+.table {
+  border: 0px solid darkgray;
+  padding: 26rpx 0 0 0;
+  font-size: 30rpx;
+}
+.tr {
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+  width: 40%;
+  justify-content: center;
+  text-align: center;
+}
+.bg-w {
+  background: snow;
+}
+.bg-g {
+  background: #e6f3f9;
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #3366ff;
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
 }
 </style>
 <template>
 
-<view class="weui-tab">
-    <view class="weui-navbar">
-        <block wx:for="{{tabs}}" wx:key="*this">
-            <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" @tap="tabClick">
-                <view class="weui-navbar__title">{{item}}</view>
-            </view>
-        </block>
-        <view class="weui-navbar__slider" style="transform: translateX({{sliderOffset}}px);"></view>
+    <view class="table">
+        <view
+            class="tr bg-w"
+            style="padding:0px;"
+        >
+            <view class="th">项目名称</view>
+            <view class="th">信息录入专员</view>
+            <view class="th ">状态</view>
+            <view class="th">更多</view>
+            <view class="th">详情</view>
+        </view>
+
+        <scroll-view
+            scroll-y="true"
+            style="height: 600rpx;"
+            bindscrolltoupper="upper"
+            bindscrolltolower="lower"
+            bindscroll="scroll"
+        >
+            <block
+                wx:for="{{listData}}"
+                wx:key="{{code}}"
+            >
+                <view
+                    class="tr bg-g"
+                    wx:if="{{index % 2 == 0}}"
+                >
+                    <view class="td">{{item.projectName}}</view>
+                    <view class="td">{{item.projectAccount}}</view>
+                    <view class="td">{{item.status}}</view>
+                    <view class="td">更多</view>
+                    <view class="td">详情</view>
+
+                </view>
+                <view
+                    class="tr"
+                    wx:else
+                >
+                    <view class="td">{{item.projectName}}</view>
+                    <view class="td">{{item.projectAccount}}</view>
+                    <view class="td">{{item.status}}</view>
+                    <view class="td">更多</view>
+                    <view class="td">详情</view>
+                </view>
+            </block>
+
+        </scroll-view>
+
     </view>
-    <view class="weui-tab__panel">
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">选项一的内容</view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">选项二的内容</view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">选项三的内容</view>
-    </view>
-</view>
 </template>
 
 <script lang="typescript" src="./projectList.ts">
-
 </script> 

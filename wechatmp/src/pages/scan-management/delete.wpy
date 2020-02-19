@@ -1,0 +1,136 @@
+<style lang="less">
+view {
+  padding: 10rpx;
+}
+
+.table {
+  border: 0px solid darkgray;
+}
+.tr {
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+  width: 40%;
+  justify-content: center;
+  text-align: center;
+}
+.bg-w {
+  background: snow;
+}
+.bg-g {
+  background: #e6f3f9;
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #3366ff;
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
+.btn-wrap {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+}
+.btn-wrap > button {
+  width: 200rpx;
+}
+.weui-btn:first-child {
+  margin-top: 15px;
+}
+</style>
+<template>
+    <block>
+        <camera
+            device-position="back"
+            mode="scanCode"
+            flash="off"
+            bindscancode="takeCode"
+            binderror="error"
+            style="width: 100%; height: 400rpx;"
+        ></camera>
+        <view>
+            <view class="table">
+                <view
+                    class="tr bg-w"
+                    style="padding:0px;"
+                >
+                    <view class="th">项目名称</view>
+                    <view class="th">序号</view>
+                    <view class="th ">数量</view>
+                </view>
+
+                <scroll-view
+                    scroll-y="true"
+                    style="height: 500rpx;"
+                    bindscrolltoupper="upper"
+                    bindscrolltolower="lower"
+                    bindscroll="scroll"
+                >
+                    <block
+                        wx:for="{{listData}}"
+                        wx:key="{{code}}"
+                    >
+                        <view
+                            class="tr bg-g"
+                            wx:if="{{index % 2 == 0}}"
+                        >
+                            <view class="td">{{item.code}}</view>
+                            <view class="td">{{item.text}}</view>
+                            <view class="td">{{item.type}}</view>
+                        </view>
+                        <view
+                            class="tr"
+                            wx:else
+                        >
+                            <view class="td">{{item.code}}</view>
+                            <view class="td">{{item.text}}</view>
+                            <view class="td">{{item.type}}</view>
+                        </view>
+                    </block>
+
+                </scroll-view>
+
+            </view>
+
+        </view>
+        <view class="btn-wrap">
+            <button
+                class="green-btn weui-btn"
+                @tap="onDelete"
+            >删除</button>
+            <button
+                class="green-btn weui-btn"
+                @tap="backTo"
+            >提交删除</button>
+        </view>
+
+        <modal
+            id="modal"
+            hidden="{{hiddenModalInput}}"
+            title="每次扫描的秒数(请输入正整数)"
+            confirm-text="修改"
+            cancel-text="取消"
+            bindcancel="cancel"
+            bindconfirm="confirm"
+        >
+            <input
+                type="number"
+                placeholder="秒数"
+                auto-focus
+                value="{{inputVal}}"
+            />
+        </modal>
+
+    </block>
+</template>
+<script lang="typescript" src="./delete.ts">
+</script>

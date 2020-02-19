@@ -1,10 +1,8 @@
 import wepy from "wepy";
-import { API } from "../../api.service";
 
-export default class scan extends wepy.page {
-    api = API;
+export default class deleteCode extends wepy.page {
     config = {
-        navigationBarTitleText: "扫码页面",
+        navigationBarTitleText: "删码页面",
     }
     data = {
         isShowInput: false,
@@ -48,9 +46,8 @@ export default class scan extends wepy.page {
             wx.navigateBack({ delta: 1 })
             console.log('backTo');
             this.data.listData.push({ "code": "cx", "text": "cx", "type": "cx" });
-        },
-        onDelete() {
-            this.$route('navigateTo', '/pages/scan-management/delete');
+            console.log('getCurrentPages()', getCurrentPages())
+
         },
         showModalInput() {
             this.data.hiddenModalInput = false;
