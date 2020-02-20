@@ -15,6 +15,7 @@ export default class extends wepy.app {
             'pages/auth/resetPassword',
             'pages/auth/logout',
             'pages/auth/login',
+            'pages/auth/register',
 
             'pages/project-management/projectList',
 

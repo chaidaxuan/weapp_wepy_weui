@@ -102,10 +102,6 @@ view {
           </block>
 
         </scroll-view>
-<<<<<<< HEAD
-
-      </view>
-=======
 
       </view>
     </view>
@@ -119,7 +115,6 @@ view {
         class="green-btn weui-btn"
         @tap="backTo"
       >确认</button>
->>>>>>> update
     </view>
 
     <modal

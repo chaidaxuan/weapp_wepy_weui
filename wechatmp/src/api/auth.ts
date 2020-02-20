@@ -44,7 +44,7 @@ export class ApiAuth {
         return this.api.JSON('/auth/login', { Phone, Password }).then(iSuccess => {
             const ret = iSuccess as IAuthLoginReturn;
             this.api.credential = { uid: ret.Result.Uid, token: ret.Result.Token };
-
+            console.log('ret', ret);
             NotifyUserRoleChange();
         }) as Promise<IAuthLoginReturn>;
     }

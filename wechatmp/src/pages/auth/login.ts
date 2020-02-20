@@ -1,11 +1,14 @@
 import wepy from "wepy";
 import event from "wepy/event";
-
+import base from '../../mixins/base'
+import http from '../../mixins/http'
 import { API, TUserStatus, IFailure } from "../../api.service";
 import 'wepy-async-function';
 
 export default class pageRegister extends wepy.page {
     api = API;
+    mixins = [base, http]
+
     config = {
         navigationBarTitleText: "登录",
     }
@@ -35,22 +38,35 @@ export default class pageRegister extends wepy.page {
         }).catch((iFailure: IFailure) => {
             this.api.log('login/ngOnInit', iFailure);
         });
+        this.api.Auth.Login('18521519605', '123456').then(iSuccess => {
+            this.$route('navigateTo', '/pages/auth/register');
+        }).catch(() => {
+        })
+
     }
     methods = {
         login(evt?: event) {
-            console.log('111111')
-            // const e = evt as any;
-            // console.log(e);
-            // this.api.Auth.Login(e.detail.value.phone, e.detail.value.password).then(iSuccess => {
+            this.$route('navigateTo', '/pages/auth/resetPassword');
+            const e = evt as any;
 
-            //     console.log('iSuccess')
-            //     this.$route('navigateTo', '/pages/auth/user');
-            //     // let toDoUrl = 'pages/project-management/projectList';
-            //     // wepy.switchTab({ url: toDoUrl })
-            // }).catch(() => {
-            //     console.log('iFailure')
-            //     this.$alert('温馨提示', '请填写正确的手机号码');
-            // })
+            this.$get({
+                url: 'https://paula.eigenvr.com/api/auth/login',
+                headers: 'application/json',
+                data: { Phone: '18521519605', Password: '123456' }
+            }, {
+                success: ({ code, data }) => {
+                    console.log(data)
+                },
+                fail: ({ code, data }) => {
+                    console.log(data)
+                }
+            }
+            )
+
+
+        },
+        switchTabToProjectList() {
+            wx.switchTab({ url: '/pages/project-management/projectList' });
         },
 
         typing: ((type: string, evt?: any) => {

@@ -33,7 +33,7 @@ export default class pageIndex extends wepy.page {
 
     methods = {
         toLogin: ($evt?: event) => {
-            this.$route('navigateTo', '/pages/auth/resetPassword');
+            this.$route('navigateTo', '/pages/auth/login');
         },
         toScan: () => {
             this.$route('navigateTo', '/pages/scan-management/scan')
