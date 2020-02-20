@@ -83,6 +83,12 @@
 					"name": "pages/auth/login",
 					"pathName": "pages/auth/login",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/project-management/projectList",
+					"pathName": "pages/project-management/projectList",
+					"scene": null
 				}
 			]
 		}

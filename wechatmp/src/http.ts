@@ -41,20 +41,11 @@ export class HttpClient {
         withCredentials?: boolean;
     }): { toPromise: () => Promise<Object> } {
 
-        const p = new Promise<Object>((resolve, reject) => {
-            this.http.$post({
-                url: url,
-                headers: options.headers,
-                data: body,
-            }, {
-                success: (({ statusCode, ...data }) => {
-                    resolve(data);
-                }) as () => {},
-                fail: (({ statusCode, ...data }) => {
-                    reject(data);
-                }) as () => {},
-            })
-        });
+        const p = this.http.$post({
+            url: url,
+            headers: options.headers,
+            data: body,
+        }).then(({ data }) => data);
 
         return {
             toPromise: () => {

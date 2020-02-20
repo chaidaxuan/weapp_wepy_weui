@@ -55,10 +55,10 @@ export default class pageRegister extends wepy.page {
                 data: { Phone: '18521519605', Password: '123456' }
             }, {
                 success: ({ code, data }) => {
-                    console.log(data)
+                    console.log(data);
                 },
                 fail: ({ code, data }) => {
-                    console.log(data)
+                    console.log(data);
                 }
             }
             )
