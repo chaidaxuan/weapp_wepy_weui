@@ -81,9 +81,11 @@ export class ApiService {
                     } else {
                         reject({ Reason: ret.Reason, Addition: ret.Addition });
                     }
+                    wx.hideNavigationBarLoading()
                 })
                 .catch((reason) => {
                     reject({ Reason: 'Network Error', Addition: reason });
+                    wx.hideNavigationBarLoading()
                 });
         });
     }

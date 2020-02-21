@@ -53,6 +53,32 @@ export class HttpClient {
             }
         };
     }
+
+    get(url: string, body: any | null, options?: {
+        headers?: {
+            [header: string]: string | string[];
+        };
+        observe?: 'body';
+        params?: {
+            [param: string]: string | string[];
+        };
+        reportProgress?: boolean;
+        responseType?: 'json';
+        withCredentials?: boolean;
+    }): { toPromise: () => Promise<Object> } {
+
+        const p = this.http.$get({
+            url: url,
+            headers: options.headers,
+            data: body,
+        }).then(({ data }) => data);
+
+        return {
+            toPromise: () => {
+                return p;
+            }
+        };
+    }
 }
 
 
