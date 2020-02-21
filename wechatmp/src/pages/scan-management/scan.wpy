@@ -87,17 +87,17 @@ view {
               class="tr bg-g"
               wx:if="{{index % 2 == 0}}"
             >
-              <view class="td">{{item.code}}</view>
-              <view class="td">{{item.text}}</view>
-              <view class="td">{{item.type}}</view>
+              <view class="td">{{item.PName}}</view>
+              <view class="td">{{item.RecordID}}</view>
+              <view class="td">{{item.quantity}}</view>
             </view>
             <view
               class="tr"
               wx:else
             >
-              <view class="td">{{item.code}}</view>
-              <view class="td">{{item.text}}</view>
-              <view class="td">{{item.type}}</view>
+              <view class="td">{{item.PName}}</view>
+              <view class="td">{{item.RecordID}}</view>
+              <view class="td">{{item.quantity}}</view>
             </view>
           </block>
 

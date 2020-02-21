@@ -17,17 +17,23 @@ export default class pageIndex extends wepy.page {
     }
     data = {
         canScan: true,
+        showLogin: true,
+        currentProcessIndex: null,
         productionProcessLabel: [
             '1开料', '2腐蚀', '3冲孔', '4折弯', '5滚弧', '6焊接', '7打磨', '8喷涂',
             '发货', '收货', '回退-修改生产', '回退-重新生产'],
         // productionProcessValue: [1, 2, 3, 4],
     }
-    canScan: boolean = true;
+    canScan: boolean;
+    isLoggedIn: boolean;
+    isShowLogin: boolean;
 
     onShow() {
         // 初始化页面数据
         this.api.Auth.IsLoggedIn().then(iSuccess => {
-            this.data.canScan = true;
+            this.canScan = true;
+            this.isShowLogin = false;
+            this.$apply(() => { });
         }).catch()
     }
 
@@ -38,7 +44,6 @@ export default class pageIndex extends wepy.page {
         toScan: () => {
             this.$route('navigateTo', '/pages/scan-management/scan')
             // wepy.scanCode({}).then(res => {
-
             // }).catch(fail => {
             //     console.log(fail);
             // })

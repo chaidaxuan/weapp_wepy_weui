@@ -56,3 +56,48 @@ export function CInteger(n: number) {
 
 // timestamp 是个 unix 时间戳（整型）
 export type TTimestamp = TInteger;
+
+export enum TRollbackStage {
+    BEFORE_DELIVERY = 1, // 发货前
+    AFTER_DELIVERY = 2, // 发货后
+    AFTER_ARRIVAL = 3, // 到货后
+    STAGEGUARDFLAG = 4, // 边界
+}
+
+export enum TRollbackOperation {
+    REPRODUCE = 1, // 重新生产
+    MODIFYPRODUCE = 2, // 修改生产
+    OPERATIONGUARDFLAG = 3, // 边界
+}
+
+export enum TRollbackResult {
+    UNDETERMINED = 0, // 未确认
+    AGREE = 1, // 同意
+    REJECTED = 2, // 驳回
+    RESULTGUARDFLAG = 3, // 边界
+}
+
+export enum TArrivalOrRollback {
+    ARRIVAL = 1, // 到货
+    ROLLBACK = 2, // 回退
+}
+
+export enum TProductionPerformanceStatus {
+    UNTREATED = 0,        // 未处理
+    CUTTING = 1,          // 开料
+    CORROSION = 2,        // 腐蚀
+    PUNCHING = 3,         // 冲孔
+    BENDING = 4,          // 折弯
+    ARC = 5,              // 滚弧
+    WELDMENT = 6,         // 焊接
+    POLISHING = 7,        // 打磨
+    SPRAYING = 8,         // 喷涂
+    PERFORMGUARDFLAG = 9, // 边界
+}
+
+export enum TReceivingDeliveryStatus {
+    BEFORE_DELIVERY = 0,          // 未发货
+    AFTER_DELIVERY = 1,           // 发货后未到货
+    AFTER_ARRIVAL = 2,            // 到货后
+    DELIVERYARRIVALGUARDFLAG = 3, // 边界
+}

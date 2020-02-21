@@ -47,6 +47,7 @@ view {
       </picker>
 
       <button
+        disabled="{{!currentProcessIndex}}"
         @tap="toScan"
         class="green-btn weui-btn"
         size="mini"

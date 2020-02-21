@@ -8,7 +8,7 @@ view {
 }
 .table {
   border: 0px solid darkgray;
-  padding: 26rpx 0 0 0;
+  padding: 16rpx 10rpx 10rpx 10rpx;
   font-size: 30rpx;
 }
 .tr {
@@ -60,16 +60,16 @@ view {
       bindscroll="scroll"
     >
       <block
-        wx:for="{{listData}}"
+        wx:for="{{projects}}"
         wx:key="{{code}}"
       >
         <view
           class="tr bg-g"
           wx:if="{{index % 2 == 0}}"
         >
-          <view class="td">{{item.projectName}}</view>
-          <view class="td">{{item.projectAccount}}</view>
-          <view class="td"><text class="iconfont icon-toggle-on"></text></view>
+          <view class="td">{{item.PName}}</view>
+          <view class="td">{{item.ProjectAccountName}}</view>
+          <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
           <view class="td"><text class="iconfont icon-more"></text></view>
           <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
         </view>
@@ -77,9 +77,9 @@ view {
           class="tr"
           wx:else
         >
-          <view class="td">{{item.projectName}}</view>
-          <view class="td">{{item.projectAccount}}</view>
-          <view class="td"><text class="iconfont icon-toggle-off"></text></view>
+          <view class="td">{{item.PName}}</view>
+          <view class="td">{{item.ProjectAccountName}}</view>
+          <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
           <view class="td"><text class="iconfont icon-more"></text></view>
           <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
         </view>
