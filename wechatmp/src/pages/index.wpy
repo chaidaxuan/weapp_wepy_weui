@@ -39,7 +39,7 @@ view {
         @tap="toLogin"
       > 立即登录</button>
       <picker
-        value="{{productionProcessValue}}"
+        value="{{Value}}"
         range="{{productionProcessLabel}}"
         bindchange="bindPickerChange"
       >

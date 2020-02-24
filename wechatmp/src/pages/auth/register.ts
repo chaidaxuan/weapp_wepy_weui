@@ -57,7 +57,6 @@ export default class pageRegister extends wepy.page {
                 } else {
                     clearInterval(timer)
                 }
-
             }, 1000)
 
             this.api.Auth.GetVerifyCode(this.data.phone).then(iSuccess => {

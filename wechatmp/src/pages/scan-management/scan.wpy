@@ -69,15 +69,12 @@ view {
         >
           <view class="th">项目名称</view>
           <view class="th">序号</view>
-          <view class="th ">数量</view>
+          <view class="th">数量</view>
         </view>
 
         <scroll-view
           scroll-y="true"
-          style="height: 500rpx;"
-          bindscrolltoupper="upper"
-          bindscrolltolower="lower"
-          bindscroll="scroll"
+          style="height: 600rpx;"
         >
           <block
             wx:for="{{listData}}"
@@ -113,7 +110,7 @@ view {
       >删除</button>
       <button
         class="green-btn weui-btn"
-        @tap="backTo"
+        @tap="onConfirm"
       >确认</button>
     </view>
 

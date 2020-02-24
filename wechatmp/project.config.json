@@ -8,6 +8,7 @@
 		"minified": false,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": false,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -18,8 +19,7 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"nodeModules": false
+		}
 	},
 	"compileType": "miniprogram",
 	"appid": "wx838533af404b2ed5",
