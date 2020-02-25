@@ -19,7 +19,14 @@ export default class pageProjectList extends wepy.page {
         sliderLeft: 0,
         sliderWidth: 1,
         projects: [],
+        animationData: null,
+        animation: null,
+        showModalStatus: false,
+        list: null
     }
+    showModalStatus: boolean;
+    // animationData: null;
+    animation: null;
     projects: {
         Pid: number; PName: string; CreatorName: string;
         CreatorPhone: string; ProjectAccountName: string;
@@ -27,6 +34,7 @@ export default class pageProjectList extends wepy.page {
         ClientCode: string; ClientName: string; Description: string;
         Comment: string; Status: TProjectStatus; LastModified: number;
     }[];
+    animationData: Record<string, any>[];
 
     onLoad() {
         // https://github.com/Tencent/wepy/wiki/wepy%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8Promise
@@ -43,12 +51,27 @@ export default class pageProjectList extends wepy.page {
             //  异步操作加this.$apply()
             this.$apply(() => { });
         }).catch(failure => {
-            console.log('failure', failure)
+            console.log('failure', failure);
         })
+        let animation = wx.createAnimation({
+            duration: 1000,
+            timingFunction: 'ease'
+        })
+        this.data.animation = animation;
     }
-
+    util(currentStatus) {
+    }
     methods = {
-
+        onMore(e) {
+            this.showModalStatus = true;
+            this.list = e.currentTarget.dataset.item;
+            console.log('e', e);
+            this.$apply(() => { });
+        },
+        hideModalStatus() {
+            this.showModalStatus = false;
+            this.$apply(() => { });
+        }
     }
     tabClick(evt?: event) {
 

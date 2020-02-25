@@ -48,7 +48,7 @@
             />
             <view class="userinfo-info">
               <view class="userinfo-nickname">姓名:{{userInfo.nickName}}</view>
-              <view class="userinfo-status">身份:{{role}}</view>
+              <view class="userinfo-status">身份:{{userInfo.role}}</view>
             </view>
           </view>
         </view>

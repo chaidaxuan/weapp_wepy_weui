@@ -4,7 +4,7 @@
   text-align: center;
 }
 view {
-  padding: 10rpx;
+  padding: 8rpx;
 }
 .table {
   border: 0px solid darkgray;
@@ -37,6 +37,14 @@ view {
   height: 3rem;
   align-items: center;
 }
+.th-50 {
+  width: 50%;
+}
+.animation {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
 </style>
 <template>
 
@@ -44,20 +52,20 @@ view {
     <view
       class="tr bg-w"
       style="padding:0px;"
+      wx:if="{{!showModalStatus}}"
     >
       <view class="th">项目名称</view>
       <view class="th">信息录入专员</view>
-      <view class="th ">状态</view>
+      <view class="th">状态</view>
       <view class="th">更多</view>
       <view class="th">详情</view>
     </view>
 
     <scroll-view
       scroll-y="true"
+      class="animation"
       style="height: 600rpx;"
-      bindscrolltoupper="upper"
-      bindscrolltolower="lower"
-      bindscroll="scroll"
+      wx:if="{{!showModalStatus}}"
     >
       <block
         wx:for="{{projects}}"
@@ -70,7 +78,11 @@ view {
           <view class="td">{{item.PName}}</view>
           <view class="td">{{item.ProjectAccountName}}</view>
           <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
-          <view class="td"><text class="iconfont icon-more"></text></view>
+          <view
+            class="td"
+            @tap="onMore"
+            data-item="{{item}}"
+          ><text class="iconfont icon-more"></text></view>
           <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
         </view>
         <view
@@ -80,13 +92,75 @@ view {
           <view class="td">{{item.PName}}</view>
           <view class="td">{{item.ProjectAccountName}}</view>
           <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
-          <view class="td"><text class="iconfont icon-more"></text></view>
+          <view
+            class="td"
+            @tap="onMore"
+            data-item="{{item}}"
+          ><text class="iconfont icon-more"></text></view>
           <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
         </view>
       </block>
 
     </scroll-view>
 
+    <view wx:if="{{showModalStatus}}">
+      <view class="tr bg-w">
+        <view class="th th-50">类别</view>
+        <view class="th th-50">内容</view>
+      </view>
+      <scroll-view
+        scroll-y="true"
+        style="height: 950rpx;"
+      >
+        <block>
+          <view class="tr bg-g">
+            <view class="td">项目名称</view>
+            <view class="td">{{list.PName}}</view>
+          </view>
+        </block>
+        <block>
+          <view class="tr bg-g">
+            <view class="td">客户编码</view>
+            <view class="td">{{list.ClientCode}}</view>
+          </view>
+        </block>
+        <block>
+          <view class="tr bg-g">
+            <view class="td">客户名称</view>
+            <view class="td">{{list.ClientCode}}</view>
+          </view>
+        </block>
+        <block>
+          <view class="tr bg-g">
+            <view class="td">工程说明</view>
+            <view class="td">{{list.ClientCode}}</view>
+          </view>
+        </block>
+        <block>
+          <view class="tr bg-g">
+            <view class="td">备注</view>
+            <view class="td">{{list.Comment}}</view>
+          </view>
+        </block>
+        <block>
+          <view class="tr bg-g">
+            <view class="td">信息录入专员</view>
+            <view class="td">{{list.ProjectAccountName}}</view>
+          </view>
+        </block>
+        <block>
+          <view class="tr bg-g">
+            <view class="td">操作记录</view>
+            <view class="td">时间icon</view>
+          </view>
+        </block>
+        <button
+          class="green-btn weui-btn"
+          @tap="hideModalStatus"
+        > 返回</button>
+      </scroll-view>
+
+    </view>
   </view>
 </template>
 

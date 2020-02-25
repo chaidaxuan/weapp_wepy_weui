@@ -11,8 +11,24 @@ export type listData = {
     ProductionPerformanceStatus: TProductionPerformanceStatus;
     ReceivingDeliveryStatus: TReceivingDeliveryStatus
     Reason: string;
+    quantity: number,
+    unDeliveryAmount: number
 }[];
-
+// { Pid: iSuccess.result.Pid, recordID: iSuccess.Result.RecordID, info: iSuccess };
+export type sameRecordIdBarcode = {
+    Pid: number;
+    recordID: number;
+    info: {
+        Barcodes: string[];
+        Barcode: string;
+        Pid: number;
+        PName: string;
+        RecordID: number;
+        ProductionPerformanceStatus: TProductionPerformanceStatus;
+        ReceivingDeliveryStatus: TReceivingDeliveryStatus
+        Reason: string;
+    };
+}
 export default class scan extends wepy.page {
     api = API;
     config = {
@@ -24,19 +40,14 @@ export default class scan extends wepy.page {
         hiddenModalInput: true,
         inputVal: 10,
         scanSpeed: this.data.inputVal,
-        listData: [
-            {
-                "Barcode": "0", "Pid": "3", "PName": "type1", "RecordID": '8',
-                'ProductionPerformanceStatus': 3, 'ReceivingDeliveryStatus': 0,
-                'Reason': "", 'quantity': 0,
-            },
-        ],
+        listData: [],
         BarcodeOperations: [],
         pendingBarcode: new Set(),
-        sameRecordIdBarcode: new Set(),
+        sameRecordIdBarcodes: [],
     }
     scanFunctionIsUseable: boolean;
     scanInterval = null;
+    sameRecordIdBarcodes: sameRecordIdBarcode;
     BarcodeOperations: IEndPointScanProductionPerformanceRequest;
     listData: listData;
     operation: number;
@@ -93,6 +104,7 @@ export default class scan extends wepy.page {
                 wepy.showModal({ title: '设置生产动态失败', content: '', cancelText: '确定' });
             }
         );
+
     }
 
     methods = {
@@ -100,43 +112,56 @@ export default class scan extends wepy.page {
             if (this.scanFunctionIsUseable) {
                 this.scanFunctionIsUseable = false;
                 console.log('这次扫码', e.detail);
-                if (this.sameRecordIdBarcode && this.sameRecordIdBarcode.has(e.detail.result)) {
-                    //todo 缓存同一recordId的条形码
-                }
                 if (!this.pendingBarcode.has(e.detail.result)) {
-                    //拿这个码请求,可以得到pid,recordID,再计算出每个record下已经扫描的总数量s
-                    this.api.EndPoint.ScanBarcodeInfo(e.detail.result).then(
-                        iSuccess => {
-                            iSuccess.Result.Barcodes.forEach(item => {
-                                this.sameRecordIdBarcode.add(item);
-                            }
-                            );
-                            let isHas = false;
-                            this.listData.forEach(list => {
-                                if (list.Pid === iSuccess.Result.Pid && list.RecordID === iSuccess.Result.RecordID) {
-                                    isHas = true;
-                                    list.quantity++;
+                    let sameRecordIdBarcodesIsHas = false;
+                    console.log('this.sameRecordIdBarcodesIsHas', this.sameRecordIdBarcodes);
+                    this.data.listData.forEach(x => {
+                        console.log('listData', x);
+                        if (x.Barcodes) {
+                            x.Barcodes.forEach(y => {
+                                if (y === e.detail.result) {
+                                    x.quantity++;
+                                    this.pendingBarcode.add(e.detail.result);
+                                    sameRecordIdBarcodesIsHas = true;
+                                }
+                            })
+                        }
+                    })
+                    console.log('sameRecordIdBarcodesIsHas', sameRecordIdBarcodesIsHas)
+                    if (!sameRecordIdBarcodesIsHas) {
+                        //拿这个码请求,可以得到pid,recordID,再计算出每个recordID下已经扫描的总数量
+                        this.api.EndPoint.ScanBarcodeInfo(e.detail.result).then(
+                            iSuccess => {
+                                let temp: sameRecordIdBarcode = { Pid: iSuccess.Result.Pid, recordID: iSuccess.Result.RecordID, info: iSuccess.Result };
+                                this.sameRecordIdBarcodes.push(temp);
+                                let isHas = false;
+                                this.listData.forEach(list => {
+                                    if (list.Pid === iSuccess.Result.Pid && list.RecordID === iSuccess.Result.RecordID) {
+                                        isHas = true;
+                                        list.quantity++;
+                                    };
+                                });
+                                // 已保存的条形码中,无该条形码
+                                if (!isHas) {
+                                    this.pendingBarcode.add(iSuccess.Result.Barcode);
+                                    this.api.EndPoint.GetUnDeliveryAmount(e.detail.result).then(
+                                        ISuccess => {
+                                            let temp = { ...iSuccess.Result, quantity: 1, unDeliveryAmount: ISuccess.Result.UnDeliveryAmount };
+                                            this.listData.push(temp);
+                                            this.$apply(() => { });
+                                        }
+                                    ).catch();
                                 };
-                            });
-                            // 已保存的条形码中,无该条形码
-                            if (!isHas) {
-                                this.pendingBarcode.add(iSuccess.Result.Barcode);
-                                this.api.EndPoint.GetUnDeliveryAmount(e.detail.result).then(
-                                    ISuccess => {
-                                        let temp = { ...iSuccess.Result, quantity: 1, unDeliveryAmount: ISuccess.Result.UnDeliveryAmount };
-                                        this.listData.push(temp);
-                                    }
-                                ).catch();
-                            };
-                            console.log('this.listData', this.listData);
-                            this.$apply(() => { });
-                            wx.vibrateShort();//15ms的震动
-                        }
-                    ).catch(
-                        iFailure => {
-                            console.log('iFailure', iFailure);
-                        }
-                    )
+                                console.log('this.listData', this.listData);
+                                this.$apply(() => { });
+                                wx.vibrateShort();//15ms的震动
+                            }
+                        ).catch(
+                            iFailure => {
+                                console.log('iFailure', iFailure);
+                            }
+                        )
+                    }
                 }
             };
             console.log('this.pendingBarcode', this.pendingBarcode);

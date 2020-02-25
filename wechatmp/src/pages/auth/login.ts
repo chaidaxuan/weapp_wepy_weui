@@ -39,29 +39,29 @@ export default class pageRegister extends wepy.page {
             this.api.log('login/ngOnInit', iFailure);
         });
         this.api.Auth.Login('18521519605', '123456').then(iSuccess => {
-            this.$route('navigateTo', '/pages/auth/register');
+            wepy.switchTab({ url: '/pages/project-management/projectList' });
         }).catch(() => {
         })
 
     }
     methods = {
         login(evt?: event) {
-            this.$route('navigateTo', '/pages/auth/resetPassword');
             const e = evt as any;
 
-            this.$get({
-                url: 'https://paula.eigenvr.com/api/auth/login',
-                headers: 'application/json',
-                data: { Phone: '18521519605', Password: '123456' }
-            }, {
-                success: ({ code, data }) => {
-                    console.log(data);
-                },
-                fail: ({ code, data }) => {
-                    console.log(data);
-                }
-            }
-            )
+            // this.$get({
+            //     url: 'https://paula.eigenvr.com/api/auth/login',
+            //     headers: 'application/json',
+            //     data: { Phone: '18521519605', Password: '123456' }
+            // }, {
+            //     success: ({ code, data }) => {
+            //         wepy.switchTab({ url: '/pages/project-management/projectList' });
+            //         console.log(data);
+            //     },
+            //     fail: ({ code, data }) => {
+            //         console.log(data);
+            //     }
+            // }
+            // )
 
 
         },
