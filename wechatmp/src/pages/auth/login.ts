@@ -47,7 +47,6 @@ export default class pageRegister extends wepy.page {
     methods = {
         login(evt?: event) {
             const e = evt as any;
-
             // this.$get({
             //     url: 'https://paula.eigenvr.com/api/auth/login',
             //     headers: 'application/json',

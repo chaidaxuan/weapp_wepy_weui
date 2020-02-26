@@ -20,13 +20,13 @@
 
 @font-face {
   font-family: 'iconfont'; /* project id 1490912 */
-  src: url('//at.alicdn.com/t/font_1490912_qcxrqed3a9o.eot');
-  src: url('//at.alicdn.com/t/font_1490912_qcxrqed3a9o.eot?#iefix')
+  src: url('//at.alicdn.com/t/font_1490912_e3mu05tafr4.eot');
+  src: url('//at.alicdn.com/t/font_1490912_e3mu05tafr4.eot?#iefix')
       format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_1490912_qcxrqed3a9o.woff2') format('woff2'),
-    url('//at.alicdn.com/t/font_1490912_qcxrqed3a9o.woff') format('woff'),
-    url('//at.alicdn.com/t/font_1490912_qcxrqed3a9o.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_1490912_qcxrqed3a9o.svg#iconfont') format('svg');
+    url('//at.alicdn.com/t/font_1490912_e3mu05tafr4.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1490912_e3mu05tafr4.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1490912_e3mu05tafr4.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1490912_e3mu05tafr4.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -52,6 +52,9 @@
 
 .icon-iphone:before {
   content: '\e888';
+}
+.icon-history:before {
+  content: '\e81a';
 }
 </style>
 <script src="./app.ts" lang="typescript"></script>

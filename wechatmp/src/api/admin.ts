@@ -124,7 +124,6 @@ export class ApiAdmin {
         return this.api.JSON('/admin/getprojectaccounts', {});
     }
 
-
     GetProjects(): Promise<IAdminGetProjects> {
         return this.api.JSON('/admin/getprojects', {});
     }

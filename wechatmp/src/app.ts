@@ -18,6 +18,7 @@ export default class extends wepy.app {
             'pages/auth/register',
 
             'pages/project-management/projectList',
+            'pages/project-management/projectListHistory',
 
             'pages/scan-management/scan',
             'pages/scan-management/delete',
@@ -28,7 +29,7 @@ export default class extends wepy.app {
             backgroundTextStyle: 'light',
             navigationBarBackgroundColor: '#049BFF',
             navigationBarTitleText: 'WeChat',
-            navigationBarTextStyle: 'white'
+            navigationBarTextStyle: 'white',
         },
         tabBar: {
             color: '#AEADAD',
@@ -54,7 +55,21 @@ export default class extends wepy.app {
             }]
         },
     };
+    // globalData = {
+    //     user: null,
+    //     cart: null
+    // }
+    globalData = {
+        userInfo: null,
+        navHeight: 0
+    }
     onLaunch() {
+        wepy.getSystemInfo().then(
+            res => {
+                this.globalData.navHeight = res.statusBarHeight + 46;
+                console.log('this.globalData', this.globalData);
+            }
+        ).catch()
         console.log('on launch')
     }
 }

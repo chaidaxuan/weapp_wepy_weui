@@ -45,121 +45,186 @@ view {
   top: 50%;
   transform: translateY(-50%);
 }
+.nav {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.nav-title {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  font-family: PingFang-SC-Medium;
+  font-size: 36rpx;
+  letter-spacing: 2px;
+}
+.nav .back {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px 15px;
+}
+.bg-white {
+  background-color: #ffffff;
+}
+.bg-gray {
+  background-color: #f7f7f7;
+}
+.overflow {
+  overflow: auto;
+}
+.hidden {
+  overflow: hidden;
+}
+.padding-0 {
+  padding: 0;
+}
+.search {
+  background-color: #e6f3f9;
+  margin-top: 38rpx;
+  margin-left: 8rpx;
+  width: 50vw;
+  padding-left: 50rpx;
+  border-radius: 60rpx;
+}
 </style>
 <template>
-
-  <view class="table">
+  <view>
     <view
-      class="tr bg-w"
-      style="padding:0px;"
-      wx:if="{{!showModalStatus}}"
+      class='nav bg-white padding-0'
+      style="height:{{navH}}px"
     >
-      <view class="th">项目名称</view>
-      <view class="th">信息录入专员</view>
-      <view class="th">状态</view>
-      <view class="th">更多</view>
-      <view class="th">详情</view>
+      <input
+        class="weui-input search"
+        @input="typing('searchTerm')"
+        placeholder="搜索"
+      />
     </view>
-
-    <scroll-view
-      scroll-y="true"
-      class="animation"
-      style="height: 600rpx;"
-      wx:if="{{!showModalStatus}}"
-    >
-      <block
-        wx:for="{{projects}}"
-        wx:key="{{code}}"
+    <view class="table">
+      <view
+        class="tr bg-w padding-0"
+        wx:if="{{!showModalStatus}}"
       >
-        <view
-          class="tr bg-g"
-          wx:if="{{index % 2 == 0}}"
-        >
-          <view class="td">{{item.PName}}</view>
-          <view class="td">{{item.ProjectAccountName}}</view>
-          <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
-          <view
-            class="td"
-            @tap="onMore"
-            data-item="{{item}}"
-          ><text class="iconfont icon-more"></text></view>
-          <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
-        </view>
-        <view
-          class="tr"
-          wx:else
-        >
-          <view class="td">{{item.PName}}</view>
-          <view class="td">{{item.ProjectAccountName}}</view>
-          <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
-          <view
-            class="td"
-            @tap="onMore"
-            data-item="{{item}}"
-          ><text class="iconfont icon-more"></text></view>
-          <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
-        </view>
-      </block>
-
-    </scroll-view>
-
-    <view wx:if="{{showModalStatus}}">
-      <view class="tr bg-w">
-        <view class="th th-50">类别</view>
-        <view class="th th-50">内容</view>
+        <view class="th">项目名称</view>
+        <view class="th">信息录入专员</view>
+        <view class="th">状态</view>
+        <view class="th">更多</view>
+        <view class="th">详情</view>
       </view>
+
       <scroll-view
         scroll-y="true"
-        style="height: 950rpx;"
+        style="height: 800rpx;"
+        wx:if="{{!showModalStatus}}"
       >
-        <block>
-          <view class="tr bg-g">
-            <view class="td">项目名称</view>
-            <view class="td">{{list.PName}}</view>
+        <block
+          wx:for="{{projects}}"
+          wx:key="{{code}}"
+        >
+          <view
+            class="tr bg-g"
+            wx:if="{{index % 2 == 0}}"
+          >
+            <view class="td">{{item.PName}}</view>
+            <view class="td">{{item.ProjectAccountName}}</view>
+            <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
+            <view
+              class="td"
+              @tap="onMore"
+              data-item="{{item}}"
+            ><text class="iconfont icon-more"></text></view>
+            <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
+          </view>
+          <view
+            class="tr"
+            wx:else
+          >
+            <view class="td">{{item.PName}}</view>
+            <view class="td">{{item.ProjectAccountName}}</view>
+            <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
+            <view
+              class="td"
+              @tap="onMore"
+              data-item="{{item}}"
+            ><text class="iconfont icon-more"></text></view>
+            <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
           </view>
         </block>
-        <block>
-          <view class="tr bg-g">
-            <view class="td">客户编码</view>
-            <view class="td">{{list.ClientCode}}</view>
-          </view>
-        </block>
-        <block>
-          <view class="tr bg-g">
-            <view class="td">客户名称</view>
-            <view class="td">{{list.ClientCode}}</view>
-          </view>
-        </block>
-        <block>
-          <view class="tr bg-g">
-            <view class="td">工程说明</view>
-            <view class="td">{{list.ClientCode}}</view>
-          </view>
-        </block>
-        <block>
-          <view class="tr bg-g">
-            <view class="td">备注</view>
-            <view class="td">{{list.Comment}}</view>
-          </view>
-        </block>
-        <block>
-          <view class="tr bg-g">
-            <view class="td">信息录入专员</view>
-            <view class="td">{{list.ProjectAccountName}}</view>
-          </view>
-        </block>
-        <block>
-          <view class="tr bg-g">
-            <view class="td">操作记录</view>
-            <view class="td">时间icon</view>
-          </view>
-        </block>
-        <button
-          class="green-btn weui-btn"
-          @tap="hideModalStatus"
-        > 返回</button>
+
       </scroll-view>
 
+      <view wx:if="{{showModalStatus}}">
+        <view class="tr bg-w">
+          <view class="th th-50">类别</view>
+          <view class="th th-50">内容</view>
+        </view>
+        <scroll-view
+          scroll-y="true"
+          style="height: 950rpx;"
+        >
+          <block>
+            <view class="tr bg-g">
+              <view class="td">项目名称</view>
+              <view class="td">{{list.PName}}</view>
+            </view>
+          </block>
+          <block>
+            <view class="tr bg-g">
+              <view class="td">客户编码</view>
+              <view class="td">{{list.ClientCode}}</view>
+            </view>
+          </block>
+          <block>
+            <view class="tr bg-g">
+              <view class="td">客户名称</view>
+              <view class="td">{{list.ClientName}}</view>
+            </view>
+          </block>
+          <block>
+            <view class="tr bg-g">
+              <view class="td">工程说明</view>
+              <view class="td">{{list.Description}}</view>
+            </view>
+          </block>
+          <block>
+            <view class="tr bg-g">
+              <view class="td">备注</view>
+              <view class="td">{{list.Comment}}</view>
+            </view>
+          </block>
+          <block>
+            <view class="tr bg-g">
+              <view class="td">信息录入专员</view>
+              <view class="td">{{list.ProjectAccountName}}</view>
+            </view>
+          </block>
+          <block>
+            <view class="tr bg-g">
+              <view class="td">操作记录</view>
+              <view
+                class="td"
+                @tap="ModificationHistory"
+                data-item="{{list}}"
+              ><text class="iconfont icon-history"></text></view>
+            </view>
+          </block>
+          <button
+            class="green-btn weui-btn"
+            @tap="hideModalStatus"
+          > 返回</button>
+        </scroll-view>
+
+      </view>
     </view>
   </view>
 </template>

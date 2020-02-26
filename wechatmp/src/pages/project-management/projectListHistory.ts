@@ -2,21 +2,24 @@ import wepy from "wepy";
 import event from "wepy/event";
 import { API } from "../../api.service";
 import { TProjectStatus } from "../../api/constants"
+import { translateTimestamp } from "../../mixins/helper";
 const app = getApp();
+
 export type projects = {
     Pid: number; PName: string; CreatorName: string;
     CreatorPhone: string; ProjectAccountName: string;
     ProjectAccountPhone: string; ProjectAccountUid: number;
     ClientCode: string; ClientName: string; Description: string;
-    Comment: string; Status: TProjectStatus; LastModified: number;
+    Comment: string; Status: TProjectStatus; LastModified: number; date: string;
 }[];
 
-export default class pageProjectList extends wepy.page {
+export default class pageProjectListHistory extends wepy.page {
     api = API;
     config = {
         navigationBarTitleText: "项目",
         navigationStyle: 'custom'
     }
+    mixins = []
     components = {
 
     }
@@ -37,7 +40,7 @@ export default class pageProjectList extends wepy.page {
             if (this.searchTerm) {
                 console.log('this.searchTerm', this.searchTerm);
                 return (this.rawProjects as projects).filter(item =>
-                    item.PName.match(this.searchTerm) || item.ProjectAccountName === this.searchTerm
+                    JSON.stringify(item).match(this.searchTerm)
                 );
             } else {
                 return this.rawProjects;
@@ -54,25 +57,23 @@ export default class pageProjectList extends wepy.page {
     navH: number;
     rawProjects: projects;
     $parent: any;
+    historyPid: number;
 
     onLoad() {
-        this.activeIndex = 444444;
+        let currentPages = getCurrentPages()[0];
+        console.log('getCurrentPages()', getCurrentPages());
+        this.historyPid = parseInt(currentPages.options.historyPid);
+
         this.navH = this.$parent.globalData.navHeight;
-        console.log(' this.navH', this.navH);
-        // https://github.com/Tencent/wepy/wiki/wepy%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8Promise
-        // 在1.4.1以下版本，wepy生成的项目默认都会加入promise polyfill,在1.4.1以后的版本，需要用户手动加入，
-        this.initData();
-        // this.tabClick1();
-        // console.log('this.data.projects11', this.data.projects);s
     }
     onShow() {
         this.initData();
-
     }
     initData() {
-        this.api.Admin.GetProjects().then(project => {
-            this.projects = project.Result.Projects;
-            this.rawProjects = project.Result.Projects;
+        this.api.EndPoint.GetProjectHistory(this.historyPid).then(project => {
+            this.projects = project.Result.Projects.map(x => ({ ...x, date: translateTimestamp(x.LastModified) }));
+            this.rawProjects = project.Result.Projects.map(x => ({ ...x, date: translateTimestamp(x.LastModified) }));
+            console.log('timestamp', this.projects);
             //  异步操作加this.$apply()
             this.$apply(() => { });
         }).catch(failure => {
@@ -84,22 +85,9 @@ export default class pageProjectList extends wepy.page {
         })
         this.data.animation = animation;
     }
-    ModificationHistory(e) {
-        let historyPid: number = e.currentTarget.dataset.item.Pid;
-        this.$redirect(`/pages/project-management/projectListHistory`, { historyPid: historyPid });
-    }
     util(currentStatus) {
     }
     methods = {
-        onMore(e) {
-            this.showModalStatus = true;
-            wepy.setNavigationBarTitle({ title: 'test' });
-            this.list = e.currentTarget.dataset.item;
-            console.log('e', e);
-        },
-        hideModalStatus() {
-            this.showModalStatus = false;
-        },
         typing: ((type: string, evt?: any) => {
             this[type] = evt.detail.value;
             console.log('search', evt.detail.value);

@@ -45,14 +45,7 @@ export default class pageIndex extends wepy.page {
         toScan: () => {
             // this.$route('navigateTo', `/pages/scan-management/scan?process=${this.data.productionProcessValue[this.data.currentProcessIndex]}`)
             this.$redirect(`/pages/scan-management/scan`, { process: '1' });
-            // wepy.scanCode({}).then(res => {
-            // }).catch(fail => {
-            //     console.log(fail);
-            // })
         },
-        // bindPickerChange: ($evt?: event) => {
-
-        // }
         bindPickerChange: function (e) {
             console.log('picker发送选择改变，携带值为', e);
             this.currentProcessIndex = e.detail.value;

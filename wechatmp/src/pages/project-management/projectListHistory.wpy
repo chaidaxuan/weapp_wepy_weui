@@ -1,0 +1,165 @@
+<style lang="less">
+.weui-tab__content {
+  padding-top: 60rpx;
+  text-align: center;
+}
+view {
+  padding: 8rpx;
+}
+.table {
+  border: 0px solid darkgray;
+  padding: 16rpx 10rpx 10rpx 10rpx;
+  font-size: 30rpx;
+}
+.tr {
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+  width: 40%;
+  justify-content: center;
+  text-align: center;
+}
+.bg-w {
+  background: snow;
+}
+.bg-g {
+  background: #e6f3f9;
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #3366ff;
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
+.th-50 {
+  width: 50%;
+}
+.animation {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.nav-title {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  font-family: PingFang-SC-Medium;
+  font-size: 36rpx;
+  letter-spacing: 2px;
+}
+.nav .back {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px 15px;
+}
+.bg-white {
+  background-color: #ffffff;
+}
+.bg-gray {
+  background-color: #f7f7f7;
+}
+.overflow {
+  overflow: auto;
+}
+.hidden {
+  overflow: hidden;
+}
+.padding-0 {
+  padding: 0;
+}
+.search {
+  background-color: #e6f3f9;
+  margin-top: 38rpx;
+  margin-left: 8rpx;
+  width: 50vw;
+  padding-left: 50rpx;
+  border-radius: 60rpx;
+}
+</style>
+<template>
+  <view>
+    <view
+      class='nav bg-white padding-0'
+      style="height:{{navH}}px"
+    >
+      <input
+        class="weui-input search"
+        @input="typing('searchTerm')"
+        placeholder="搜索"
+      />
+    </view>
+    <scroll-view
+      scroll-x="true"
+      style="width: 100%;white-space:nowrap"
+    >
+      <view>
+        <view class="tr bg-w padding-0">
+          <view class="th">项目名称</view>
+          <view class="th">客户编码</view>
+          <view class="th">客户名称</view>
+          <view class="th">工程说明</view>
+          <view class="th">备注</view>
+          <view class="th">信息录入专员</view>
+          <view class="th">状态</view>
+          <view class="th">操作时间</view>
+        </view>
+        <block
+          wx:for="{{projects}}"
+          wx:key="{{code}}"
+        >
+          <view
+            class="tr bg-g"
+            wx:if="{{index % 2 == 0}}"
+          >
+            <view class="td">{{item.PName}}</view>
+            <view class="td">{{item.ClientCode}}</view>
+            <view class="td">{{item.ClientName}}</view>
+            <view class="td">{{item.Description}}</view>
+            <view class="td">{{item.Comment}}</view>
+            <view class="td">{{item.ProjectAccountName}}</view>
+            <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
+            <view class="td">{{item.date}}</view>
+          </view>
+          <view
+            class="tr"
+            wx:else
+          >
+            <view class="td">{{item.PName}}</view>
+            <view class="td">{{item.ClientCode}}</view>
+            <view class="td">{{item.ClientName}}</view>
+            <view class="td">{{item.Description}}</view>
+            <view class="td">{{item.Comment}}</view>
+            <view class="td">{{item.ProjectAccountName}}</view>
+            <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
+            <view class="td">{{item.date}}</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+</template>
+
+<script lang="typescript" src="./projectListHistory.ts">
+</script> 
