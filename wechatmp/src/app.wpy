@@ -56,5 +56,8 @@
 .icon-history:before {
   content: '\e81a';
 }
+.padding-25 {
+  padding: 25rpx;
+}
 </style>
 <script src="./app.ts" lang="typescript"></script>

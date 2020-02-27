@@ -1,6 +1,8 @@
 import wepy from "wepy";
 import { API, TProductionPerformanceStatus, TReceivingDeliveryStatus } from "../../api.service";
 import { IEndPointScanProductionPerformanceRequest } from "../../api/endpoint";
+import { ScanOperation } from "../../api/constants";
+import { IFailure } from "../../api/api";
 
 export type listData = {
     Barcodes: string[];
@@ -42,9 +44,10 @@ export default class scan extends wepy.page {
         scanSpeed: this.data.inputVal,
         listData: [],
         BarcodeOperations: [],
-        pendingBarcode: new Set(),
+        pendingBarcode: new Set<string>(),
         sameRecordIdBarcodes: [],
     }
+    pendingBarcode = new Set<string>();
     scanFunctionIsUseable: boolean;
     scanInterval = null;
     sameRecordIdBarcodes: sameRecordIdBarcode;
@@ -58,7 +61,7 @@ export default class scan extends wepy.page {
     }
     onShow() {
         this.scanControl();
-        this.data.pendingBarcode.clear()
+        // this.data.pendingBarcode.clear();
     }
     scanControl() {
         this.scanInterval = setInterval(() => {
@@ -72,20 +75,9 @@ export default class scan extends wepy.page {
         clearInterval(this.scanInterval);
         this.scanInterval = null;
     }
-    backTo() {
-        this.api.EndPoint.ScanProductionPerformance(this.BarcodeOperations).then(
-            iSuccess => {
-                wepy.showToast({ title: '请求成功' });
-                this.$redirect(`pages/index`);
-            }
-        ).catch(
-            iFailure => {
-                wepy.showModal({ title: '请求失败成功', content: '错误条码信息' });
-            }
-        )
-    }
     onConfirm() {
         // if (this.operation)
+        console.log('this.pendingBarcode', this.pendingBarcode, 'this.data.pendingBarcode', this.data.pendingBarcode);
         this.data.pendingBarcode.forEach(barCode => {
             let temp = {
                 "Barcode": barCode,
@@ -93,18 +85,34 @@ export default class scan extends wepy.page {
             };
             this.BarcodeOperations.push(temp);
         });
-        console.log('pendingBarcode', this.data.BarcodeOperations);
-        this.api.EndPoint.ScanProductionPerformance(this.BarcodeOperations).then(
-            iSuccess => {
-                wepy.showToast({ title: '设置生产动态成功', icon: 'success' })
-                wepy.switchTab({ url: '/pages/index' });
-            }
-        ).catch(
-            iFailure => {
-                wepy.showModal({ title: '设置生产动态失败', content: '', cancelText: '确定' });
-            }
-        );
+        console.log('this.pendingBarcode', this.pendingBarcode);
 
+        if (this.operation === ScanOperation.DELIVERY) {
+            let pendingBarcode: string[] = [];
+            this.data.pendingBarcode.forEach(barCode => { pendingBarcode.push(barCode) });
+            this.api.EndPoint.ScanDelivery(pendingBarcode).then(
+                iSuccess => {
+                    wepy.showToast({ title: '发货成功', icon: 'success' });
+                    wepy.switchTab({ url: '/pages/index' });
+                }
+            ).catch(
+                (iFailure: IFailure) => {
+                    wepy.showModal({ title: '发货失败', content: `原因${iFailure.Reason}`, cancelText: '确定' });
+                }
+            )
+        } else {
+            this.api.EndPoint.ScanProductionPerformance(this.BarcodeOperations).then(
+                iSuccess => {
+                    wepy.showToast({ title: '设置生产动态成功', icon: 'success' });
+                    wepy.switchTab({ url: '/pages/index' });
+                }
+            ).catch(
+                (iFailure: IFailure) => {
+                    wepy.showModal({ title: '设置生产动态失败', content: `原因${iFailure.Reason}`, cancelText: '确定' });
+                }
+            );
+        }
+        this.data.pendingBarcode.clear();
     }
 
     methods = {
@@ -121,6 +129,7 @@ export default class scan extends wepy.page {
                             x.Barcodes.forEach(y => {
                                 if (y === e.detail.result) {
                                     x.quantity++;
+                                    wx.vibrateShort();
                                     this.pendingBarcode.add(e.detail.result);
                                     sameRecordIdBarcodesIsHas = true;
                                 }

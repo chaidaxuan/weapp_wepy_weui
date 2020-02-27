@@ -94,6 +94,12 @@ export enum TProductionPerformanceStatus {
     SPRAYING = 8,         // 喷涂
     PERFORMGUARDFLAG = 9, // 边界
 }
+export enum ScanOperation {
+    DELIVERY = 10,                   // 发货
+    RECEIPT = 11,                    // 到货货
+    ROLLBACK_MODIFY_PRODUCTION = 12, // 回退-修改生产
+    ROLLBACK_REPRODUCTION = 13,      // 回退-重新生产
+}
 
 export enum TReceivingDeliveryStatus {
     BEFORE_DELIVERY = 0,          // 未发货

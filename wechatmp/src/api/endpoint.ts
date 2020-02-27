@@ -77,6 +77,17 @@ interface IEndPointScanBarcodeInfoReturn {
     Addition: {};
 }
 
+interface IEndPointScanDeliveryReturn {
+    Result: {
+        InvalidBarcodeOperations: {
+            Barcode: string;
+            Reason: string;
+        }[];
+    };
+    Addition: {};
+}
+
+
 interface IEndPointGetUnDeliveryAmountReturn {
     Result: {
         Pid: number;
@@ -110,6 +121,11 @@ export class ApiEndPoint {
     // 扫码返回剩余发货数量
     GetUnDeliveryAmount(Barcode: string): Promise<IEndPointGetUnDeliveryAmountReturn> {
         return this.api.JSON('/endpoint/getundeliveryamount', { Barcode });
+    }
+
+    // 发货扫码
+    ScanDelivery(Barcode: string[]): Promise<IEndPointScanDeliveryReturn> {
+        return this.api.JSON('/endpoint/scandelivery', { Barcode });
     }
 
 }

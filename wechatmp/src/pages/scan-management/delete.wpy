@@ -38,7 +38,6 @@ view {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 0px;
 }
 .btn-wrap > button {
   width: 200rpx;
@@ -70,10 +69,7 @@ view {
 
                 <scroll-view
                     scroll-y="true"
-                    style="height: 500rpx;"
-                    bindscrolltoupper="upper"
-                    bindscrolltolower="lower"
-                    bindscroll="scroll"
+                    style="height: 600rpx;"
                 >
                     <block
                         wx:for="{{listData}}"
@@ -83,17 +79,17 @@ view {
                             class="tr bg-g"
                             wx:if="{{index % 2 == 0}}"
                         >
-                            <view class="td">{{item.code}}</view>
-                            <view class="td">{{item.text}}</view>
-                            <view class="td">{{item.type}}</view>
+                            <view class="td">{{item.PName}}</view>
+                            <view class="td">{{item.RecordID}}</view>
+                            <view class="td">{{item.quantity}}</view>
                         </view>
                         <view
                             class="tr"
                             wx:else
                         >
-                            <view class="td">{{item.code}}</view>
-                            <view class="td">{{item.text}}</view>
-                            <view class="td">{{item.type}}</view>
+                            <view class="td">{{item.PName}}</view>
+                            <view class="td">{{item.RecordID}}</view>
+                            <view class="td">{{item.quantity}}</view>
                         </view>
                     </block>
 
@@ -105,11 +101,11 @@ view {
         <view class="btn-wrap">
             <button
                 class="green-btn weui-btn"
-                @tap="onDelete"
-            >删除</button>
+                @tap="backTo"
+            >取消</button>
             <button
                 class="green-btn weui-btn"
-                @tap="backTo"
+                @tap="onDelete"
             >提交删除</button>
         </view>
 

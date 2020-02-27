@@ -1,35 +1,51 @@
 <style lang="less">
 </style>
 <template>
-<view class="page">
-<view class="weui-cells weui-cells_after-title">
-    <form class="head-form" bindsubmit="formSubmit">
-    
-    <view class="weui-cell weui-cell_input weui-cell_vcode">
-        <view class="weui-cell__hd">
-            <view class="weui-label" >公司</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" name="verifyCode" maxlength="6" placeholder="" />
-        </view>
-    </view>
-    <view class="weui-cell weui-cell_input weui-cell_vcode">
-        <view class="weui-cell__hd">
-            <view class="weui-label" >姓名</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" name="verifyCode" maxlength="6" placeholder="" />
-        </view>
-    </view>
+    <view class="page">
+        <view class="weui-cells weui-cells_after-title padding-25">
+            <form
+                class="head-form"
+                bindsubmit="formSubmit"
+            >
 
-    <button formType="submit" class="weui-btn" type="primary" >确认修改</button>
-    
-    </form>
-   
-</view>
-</view>
+                <view class="weui-cell weui-cell_input weui-cell_vcode">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">公司</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input
+                            class="weui-input"
+                            name="verifyCode"
+                            maxlength="6"
+                            placeholder=""
+                        />
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_input weui-cell_vcode">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">姓名</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input
+                            class="weui-input"
+                            name="verifyCode"
+                            maxlength="6"
+                            placeholder=""
+                        />
+                    </view>
+                </view>
+
+                <button
+                    formType="submit"
+                    class="weui-btn"
+                    type="primary"
+                >确认修改</button>
+
+            </form>
+
+        </view>
+    </view>
 </template>
 
 <script lang="typescript" src="./modifyInfo.ts">
-
 </script> 
