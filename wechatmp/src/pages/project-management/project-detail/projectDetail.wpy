@@ -1,0 +1,146 @@
+<style lang="less" >
+.weui-tab__content {
+  padding-top: 60px;
+  text-align: center;
+}
+.tr {
+  display: flex;
+  justify-content: center;
+  // height: 3rem;
+  align-items: center;
+}
+.td {
+  width: 40%;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.bg-w {
+  background: snow;
+}
+.bg-g {
+  background: #e6f3f9;
+}
+view {
+  padding: 8rpx;
+}
+padding-0 {
+  padding: 0rpx;
+}
+</style>
+<template>
+
+    <view class="weui-tab">
+        <view class="weui-navbar">
+            <block
+                wx:for="{{tabs}}"
+                wx:key="*this"
+            >
+                <view
+                    id="{{index}}"
+                    class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}"
+                    bindtap="tabClick"
+                >
+                    <view class="weui-navbar__title">{{item}}</view>
+                </view>
+            </block>
+            <view
+                class="weui-navbar__slider"
+                style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"
+            ></view>
+        </view>
+        <view class="weui-tab__panel">
+            <view
+                class="weui-tab__content"
+                hidden="{{activeIndex != 0}}"
+            >选项一的内容</view>
+            <view
+                style="padding: 26rpx 0 0 0;"
+                hidden="{{activeIndex != 1}}"
+            >
+                <scroll-view
+                    scroll-y="true"
+                    style="height: 950rpx;"
+                >
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">产品名称</view>
+                            <view class="td">{{list.PName}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">工艺审核人</view>
+                            <view class="td">{{list.CraftAuditorPhone}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">加工单位名称</view>
+                            <view class="td">{{list.ProcessingUnitMangerName}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">加工单位代号</view>
+                            <view class="td">{{list.ProcessingUnitCode}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">加工单位负责人</view>
+                            <view class="td">{{list.ProcessingUnitMangerName}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">生产动态</view>
+                            <view class="td"><text class="iconfont icon-preview"></text></view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">生产周期</view>
+                            <view class="td">{{list.ProductionCycle}}工作日</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">生产备注</view>
+                            <view class="td">{{list.Comment}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">签证单据</view>
+                            <view class="td"><text class="iconfont icon-preview"></text></view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">操作记录</view>
+                            <view
+                                class="td"
+                                @tap="ModificationHistory"
+                                data-item="{{list}}"
+                            ><text class="iconfont icon-history"></text></view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">签证单据</view>
+                            <view class="td"><text class="iconfont icon-preview"></text></view>
+                        </view>
+                    </block>
+
+                </scroll-view>
+            </view>
+            <view
+                class="weui-tab__content"
+                hidden="{{activeIndex != 2}}"
+            >选项三的内容</view>
+        </view>
+    </view>
+</template>
+<script lang="typescript" src="./projectDetail.ts">
+</script>

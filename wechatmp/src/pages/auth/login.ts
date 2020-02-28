@@ -65,7 +65,7 @@ export default class pageRegister extends wepy.page {
 
         },
         switchTabToProjectList() {
-            wx.switchTab({ url: '/pages/project-management/projectList' });
+            wepy.switchTab({ url: '/pages/project-management/projectList' });
         },
 
         typing: ((type: string, evt?: any) => {

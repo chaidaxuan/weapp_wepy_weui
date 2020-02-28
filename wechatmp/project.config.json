@@ -104,6 +104,12 @@
 					"name": "pages/scan-management/delete",
 					"pathName": "pages/scan-management/delete",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "项目详情",
+					"pathName": "pages/project-management/project-detail/projectDetail",
+					"scene": null
 				}
 			]
 		}

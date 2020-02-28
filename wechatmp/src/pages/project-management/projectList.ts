@@ -1,8 +1,7 @@
 import wepy from "wepy";
-import event from "wepy/event";
 import { API } from "../../api.service";
 import { TProjectStatus } from "../../api/constants"
-const app = getApp();
+
 export type projects = {
     Pid: number; PName: string; CreatorName: string;
     CreatorPhone: string; ProjectAccountName: string;
@@ -22,7 +21,6 @@ export default class pageProjectList extends wepy.page {
     }
 
     data = {
-
         projects: [],
         animationData: null,
         animation: null,
@@ -69,6 +67,7 @@ export default class pageProjectList extends wepy.page {
         this.initData();
 
     }
+
     initData() {
         this.api.Admin.GetProjects().then(project => {
             this.projects = project.Result.Projects;
@@ -86,16 +85,20 @@ export default class pageProjectList extends wepy.page {
     }
     ModificationHistory(e) {
         let historyPid: number = e.currentTarget.dataset.item.Pid;
-        this.$redirect(`/pages/project-management/projectListHistory`, { historyPid: historyPid });
+        this.$redirect('/pages/project-management/projectListHistory', { historyPid: historyPid });
     }
     util(currentStatus) {
     }
     methods = {
         onMore(e) {
             this.showModalStatus = true;
-            wepy.setNavigationBarTitle({ title: 'test' });
             this.list = e.currentTarget.dataset.item;
             console.log('e', e);
+        },
+        onDetail(e) {
+            let pid: number = e.currentTarget.dataset.item.Pid;
+            this.$redirect('/pages/project-management/project-detail/projectDetail', { Pid: pid });
+            console.log('onDetail');
         },
         hideModalStatus() {
             this.showModalStatus = false;

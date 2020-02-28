@@ -21,6 +21,7 @@ view {
   width: 40%;
   justify-content: center;
   text-align: center;
+  overflow: hidden;
 }
 .bg-w {
   background: snow;
@@ -115,7 +116,10 @@ view {
       style="width: 100%;white-space:nowrap"
     >
       <view>
-        <view class="tr bg-w padding-0">
+        <view
+          class="tr bg-w padding-0"
+          style="width:1600rpx"
+        >
           <view class="th">项目名称</view>
           <view class="th">客户编码</view>
           <view class="th">客户名称</view>
@@ -123,14 +127,18 @@ view {
           <view class="th">备注</view>
           <view class="th">信息录入专员</view>
           <view class="th">状态</view>
-          <view class="th">操作时间</view>
+          <view
+            class="th"
+            style="width: 1200rpx;"
+          >操作时间</view>
         </view>
         <block
           wx:for="{{projects}}"
           wx:key="{{code}}"
         >
           <view
-            class="tr bg-g"
+            class="tr bg-g padding-0"
+            style="width:1600rpx"
             wx:if="{{index % 2 == 0}}"
           >
             <view class="td">{{item.PName}}</view>
@@ -140,10 +148,14 @@ view {
             <view class="td">{{item.Comment}}</view>
             <view class="td">{{item.ProjectAccountName}}</view>
             <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
-            <view class="td">{{item.date}}</view>
+            <view
+              class="td"
+              style="width: 1200rpx;"
+            >{{item.date}}</view>
           </view>
           <view
-            class="tr"
+            class="tr  padding-0"
+            style="width:1600rpx"
             wx:else
           >
             <view class="td">{{item.PName}}</view>
@@ -153,7 +165,10 @@ view {
             <view class="td">{{item.Comment}}</view>
             <view class="td">{{item.ProjectAccountName}}</view>
             <view class="td"><text class="iconfont {{item.Status==20?'icon-toggle-on':'icon-toggle-off'}}"></text></view>
-            <view class="td">{{item.date}}</view>
+            <view
+              class="td"
+              style="width: 1200rpx;"
+            >{{item.date}}</view>
           </view>
         </block>
       </view>

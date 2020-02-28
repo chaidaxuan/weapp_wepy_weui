@@ -19,6 +19,7 @@ export default class extends wepy.app {
 
             'pages/project-management/projectList',
             'pages/project-management/projectListHistory',
+            'pages/project-management/project-detail/projectDetail',
 
             'pages/scan-management/scan',
             'pages/scan-management/delete',

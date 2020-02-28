@@ -25,7 +25,6 @@ export default class pageProjectListHistory extends wepy.page {
     }
 
     data = {
-
         projects: [],
         animationData: null,
         animation: null,

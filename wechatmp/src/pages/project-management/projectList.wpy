@@ -14,13 +14,14 @@ view {
 .tr {
   display: flex;
   justify-content: center;
-  height: 3rem;
+  // height: 3rem;
   align-items: center;
 }
 .td {
   width: 40%;
   justify-content: center;
   text-align: center;
+  overflow: hidden;
 }
 .bg-w {
   background: snow;
@@ -143,7 +144,11 @@ view {
               @tap="onMore"
               data-item="{{item}}"
             ><text class="iconfont icon-more"></text></view>
-            <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
+            <view
+              class="td"
+              @tap="onDetail"
+              data-item="{{item}}"
+            ><text class="iconfont icon-double-arrow-right"></text></view>
           </view>
           <view
             class="tr"
@@ -157,14 +162,18 @@ view {
               @tap="onMore"
               data-item="{{item}}"
             ><text class="iconfont icon-more"></text></view>
-            <view class="td"><text class="iconfont icon-double-arrow-right"></text></view>
+            <view
+              class="td"
+              @tap="onDetail"
+              data-item="{{item}}"
+            ><text class="iconfont icon-double-arrow-right"></text></view>
           </view>
         </block>
 
       </scroll-view>
 
       <view wx:if="{{showModalStatus}}">
-        <view class="tr bg-w">
+        <view class="tr bg-w padding-0">
           <view class="th th-50">类别</view>
           <view class="th th-50">内容</view>
         </view>
