@@ -1,6 +1,6 @@
 import wepy from "wepy";
-import { API, TTimestamp, TVerifyStatus } from "../../../api.service";
-import { IFailure } from "../../../api/api";
+import { API, TTimestamp, TVerifyStatus } from "../../api.service";
+import { IFailure } from "../../api/api";
 
 export type ProductionContents = {
     Id: number;
@@ -114,17 +114,11 @@ export type DesignContents = {
     LastModified: number;
 };
 
-export default class projectDetail extends wepy.page {
+export default class detail extends wepy.page {
     api = API;
     config = {
         navigationBarTitleText: "项目详情",
     }
-    onLoad() {
-        this.initData();
-    }
-    // onShow() {
-    //     this.initData();
-    // }
     // var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
     data = {
@@ -150,7 +144,12 @@ export default class projectDetail extends wepy.page {
     pid: number;
     recordID: number;
 
-
+    onLoad() {
+        this.initData();
+    }
+    // onShow() {
+    //     this.initData();
+    // }
     initData() {
         console.log('Material getCurrentPages', getCurrentPages());
         this.pid = parseInt(getCurrentPages()[getCurrentPages().length - 1].options.Pid);
@@ -182,22 +181,21 @@ export default class projectDetail extends wepy.page {
     }
 
     preview(e) {
-        let Id = e.currentTarget.dataset.item.Id;
-        this.api.EndPoint.Project.Production.DownloadCertificate(this.pid, Id).then(
-            res => {
-                let fileBlob = res.Blob;
-                console.log('fileBlob', fileBlob);
-                wx.openDocument({
-                    filePath: '',
-                    success: function () {
+        // let Id = e.currentTarget.dataset.item.Id;
+        // this.api.EndPoint.Project.Production.DownloadCertificate(this.pid, Id).then(
+        //     res => {
+        //         let fileBlob = res.Blob;
+        //         wx.openDocument({
+        //             filePath: '',
+        //             success: function () {
 
-                    }
-                })
-            }
-        ).catch((iFailure: IFailure) => {
-            console.log(`文件下载失败：原因${iFailure.Reason}`);
-        }
-        )
+        //             }
+        //         })
+        //     }
+        // ).catch((iFailure: IFailure) => {
+        //     console.log(`文件下载失败：原因${iFailure.Reason}`);
+        // }
+        // )
     }
 
 }

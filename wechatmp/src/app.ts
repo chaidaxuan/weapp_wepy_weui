@@ -18,6 +18,8 @@ export default class extends wepy.app {
             'pages/auth/register',
 
             'pages/project-management/projectList',
+            'pages/project-management/materialList',
+            'pages/project-management/detail',
             'pages/project-management/projectListHistory',
             'pages/project-management/project-detail/projectDetail',
 

@@ -97,8 +97,7 @@ export default class pageProjectList extends wepy.page {
         },
         onDetail(e) {
             let pid: number = e.currentTarget.dataset.item.Pid;
-            this.$redirect('/pages/project-management/project-detail/projectDetail', { Pid: pid });
-            console.log('onDetail');
+            this.$redirect('/pages/project-management/materialList', { Pid: pid });
         },
         hideModalStatus() {
             this.showModalStatus = false;

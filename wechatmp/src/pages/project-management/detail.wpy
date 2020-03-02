@@ -394,5 +394,5 @@ padding-0 {
         </view>
     </view>
 </template>
-<script lang="typescript" src="./projectDetail.ts">
+<script lang="typescript" src="./detail.ts">
 </script>
