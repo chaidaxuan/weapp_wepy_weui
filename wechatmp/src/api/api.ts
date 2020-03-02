@@ -133,11 +133,12 @@ export class ApiService {
             })
                 .toPromise()
                 .then(value => {
-                    const matches = /filename="(.*?)"/g.exec(value.headers.get('Content-Disposition'));
+                    let blob = value as Blob;
+                    // const matches = /filename="(.*?)"/g.exec(value.headers.get('Content-Disposition'));
                     // TODO: 找一个更好的办法
-                    const filename = decodeURIComponent(escape(atob(matches && matches.length > 1 ? matches[1] : '')));
+                    // const filename = decodeURIComponent(escape(atob(matches && matches.length > 1 ? matches[1] : '')));
 
-                    resolve({ Blob: value.body, Filename: filename });
+                    resolve({ Blob: blob, Filename: 'filename' });
                 }).catch((reason) => {
                     reject({ Reason: 'Network Error', Addition: reason });
                 });

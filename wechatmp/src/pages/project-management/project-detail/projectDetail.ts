@@ -1,5 +1,6 @@
 import wepy from "wepy";
 import { API, TTimestamp } from "../../../api.service";
+import { IFailure } from "../../../api/api";
 
 export type ProductionContents = {
     Id: number;
@@ -52,6 +53,7 @@ export default class projectDetail extends wepy.page {
     config = {
         navigationBarTitleText: "项目详情",
     }
+
     onShow() {
         this.initData();
 
@@ -60,12 +62,13 @@ export default class projectDetail extends wepy.page {
 
 
     data = {
-        tabs: ["设计", "生产", "选项三"],
+        tabs: ["设计", "生产", "收发货", "结算"],
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
         sliderWidth: 96,
-        list: ''
+        list: '',
+        pid: -1
     }
     sliderLeft: number;
     tabs: Array<string>;
@@ -73,6 +76,7 @@ export default class projectDetail extends wepy.page {
     sliderOffset: number;
     activeIndex: number;
     list: ProductionContents;
+    pid: number;
 
     onLoad() {
         var that = this;
@@ -84,8 +88,8 @@ export default class projectDetail extends wepy.page {
                 // });
             }
         });
-        let pid: number = parseFloat(getCurrentPages()[0].options.Pid);
-        this.api.EndPoint.Project.Production.GetProductionContent(pid).then(
+        this.pid = parseFloat(getCurrentPages()[0].options.Pid);
+        this.api.EndPoint.Project.Production.GetProductionContent(this.pid).then(
             iSuccess => {
                 this.list = iSuccess.Result.ProductionContents[0];
             }
@@ -103,6 +107,23 @@ export default class projectDetail extends wepy.page {
             this.activeIndex = e.currentTarget.id
     }
 
+    preview(e) {
+        let Id = e.currentTarget.dataset.item.Id;
+        this.api.EndPoint.Project.Production.DownloadCertificate(this.pid, Id).then(
+            res => {
+                let fileBlob = res.Blob;
+                wx.openDocument({
+                    filePath: '',
+                    success: function () {
+
+                    }
+                })
+            }
+        ).catch((iFailure: IFailure) => {
+            console.log(`文件下载失败：原因${iFailure.Reason}`);
+        }
+        )
+    }
 
     initData() {
         let currentPages = getCurrentPages();

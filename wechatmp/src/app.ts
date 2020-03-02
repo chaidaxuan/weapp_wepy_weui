@@ -39,7 +39,7 @@ export default class extends wepy.app {
             borderStyle: 'black',
             "list": [{
                 "pagePath": "pages/index",
-                "iconPath": "image/homepage.png",
+                "iconPath": "image/project.png",
                 "selectedIconPath": "image/icon_component_HL.png",
                 "text": "首页"
             }, {

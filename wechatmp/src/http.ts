@@ -32,12 +32,12 @@ export class HttpClient {
         headers?: {
             [header: string]: string | string[];
         };
-        observe?: 'body';
+        observe?: 'body' | 'response';
         params?: {
             [param: string]: string | string[];
         };
         reportProgress?: boolean;
-        responseType?: 'json';
+        responseType?: 'json' | 'blob';
         withCredentials?: boolean;
     }): { toPromise: () => Promise<Object> } {
 
