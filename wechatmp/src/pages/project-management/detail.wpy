@@ -1,3 +1,5 @@
+<script lang="typescript" src="./detail.ts">
+</script>
 <style lang="less" >
 .weui-tab__content {
   padding-top: 60px;
@@ -299,6 +301,7 @@ padding-0 {
                 </scroll-view>
             </view>
             <view
+                class="weui-tab__content"
                 style="padding: 26rpx 0 0 0;"
                 hidden="{{activeIndex != 1}}"
             >
@@ -394,5 +397,3 @@ padding-0 {
         </view>
     </view>
 </template>
-<script lang="typescript" src="./detail.ts">
-</script>

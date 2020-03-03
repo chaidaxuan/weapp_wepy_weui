@@ -4,7 +4,6 @@ import { TProjectRole } from '../constants';
 import { ApiDesign } from './project/design';
 import { ApiProjectUser } from './project/projectuser';
 import { ApiProduction } from './project/production';
-import { ApiDelivery } from './project/delivery';
 
 
 interface IEndPointGetProjectRoleReturn {
@@ -21,7 +20,6 @@ export class ApiProject {
         public Design: ApiDesign,
         public ProjectUser: ApiProjectUser,
         public Production: ApiProduction,
-        public Delivery: ApiDelivery
     ) { }
 
 

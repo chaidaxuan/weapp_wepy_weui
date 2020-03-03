@@ -100,6 +100,19 @@ export default class scan extends wepy.page {
                     wepy.showModal({ title: '发货失败', content: `原因${iFailure.Reason}`, cancelText: '确定' });
                 }
             )
+        } else if (this.operation === ScanOperation.RECEIPT) {
+            let pendingBarcode: string[] = [];
+            this.data.pendingBarcode.forEach(barCode => { pendingBarcode.push(barCode) });
+            this.api.EndPoint.ScanReceiving(pendingBarcode).then(
+                iSuccess => {
+                    wepy.showToast({ title: '收货成功', icon: 'success' });
+                    wepy.switchTab({ url: '/pages/index' });
+                }
+            ).catch(
+                (iFailure: IFailure) => {
+                    wepy.showModal({ title: '收货失败', content: `原因${iFailure.Reason}`, cancelText: '确定' });
+                }
+            )
         } else {
             this.api.EndPoint.ScanProductionPerformance(this.BarcodeOperations).then(
                 iSuccess => {

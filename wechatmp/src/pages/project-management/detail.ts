@@ -1,6 +1,5 @@
 import wepy from "wepy";
 import { API, TTimestamp, TVerifyStatus } from "../../api.service";
-import { IFailure } from "../../api/api";
 
 export type ProductionContents = {
     Id: number;
@@ -117,7 +116,7 @@ export type DesignContents = {
 export default class detail extends wepy.page {
     api = API;
     config = {
-        navigationBarTitleText: "项目详情",
+        navigationBarTitleText: "项目-详情",
     }
     // var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 

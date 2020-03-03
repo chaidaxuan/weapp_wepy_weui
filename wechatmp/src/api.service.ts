@@ -11,7 +11,6 @@ import { ApiProfile } from './api/profile';
 import { ApiEndPoint } from './api/endpoint';
 import { ApiProject } from './api/endpoint/project';
 import { ApiDesign } from './api/endpoint/project/design';
-import { ApiDelivery } from './api/endpoint/project/delivery';
 import { ApiProduction } from './api/endpoint/project/production';
 import { ApiProjectUser } from './api/endpoint/project/projectuser';
 import { HttpClient } from './http';
@@ -55,7 +54,6 @@ const apiProject = new ApiProject(
   new ApiDesign(apiService),
   new ApiProjectUser(apiService),
   new ApiProduction(apiService),
-  new ApiDelivery(apiService),
 );
 
 export const API = new APIConstructor(

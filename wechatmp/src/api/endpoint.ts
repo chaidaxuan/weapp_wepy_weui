@@ -96,7 +96,15 @@ interface IEndPointGetUnDeliveryAmountReturn {
     };
     Addition: {};
 }
-
+interface IEndPointScanReceivingReturn {
+    Result: {
+        InvalidBarcodeOperations: {
+            Barcode: string;
+            Reason: string;
+        }[];
+    };
+    Addition: {};
+}
 export class ApiEndPoint {
     constructor(private api: ApiService, public Project: ApiProject) { }
 
@@ -126,6 +134,11 @@ export class ApiEndPoint {
     // 发货扫码
     ScanDelivery(Barcode: string[]): Promise<IEndPointScanDeliveryReturn> {
         return this.api.JSON('/endpoint/scandelivery', { Barcode });
+    }
+
+    // 收货扫码
+    ScanReceiving(Barcode: string[]): Promise<IEndPointScanReceivingReturn> {
+        return this.api.JSON('/endpoint/scanreceiving', { Barcode });
     }
 
 }
