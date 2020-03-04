@@ -1,5 +1,6 @@
 import wepy from "wepy";
 import { API, TTimestamp, TVerifyStatus } from "../../api.service";
+import { IFailure } from "../../api/api";
 
 export type ProductionContents = {
     Id: number;
@@ -113,6 +114,37 @@ export type DesignContents = {
     LastModified: number;
 };
 
+export type ReceivingDeliveryContents = {
+    Id: number;
+    Pid: number;
+    RecordID: number;
+    ProductName: string;
+    Amount: number;
+    DeliveryAmount: number;
+    ReceivingAmount: number;
+    UnDeliveryAmount: number;
+    UnReceivingAmount: number;
+    Comment: string;
+    CreatorUid: number;
+    CreatorName: string;
+    CreatorPhone: string;
+    LastModified: TTimestamp;
+};
+
+export type SettlementContents = {
+    Id: number;
+    Pid: number;
+    RecordID: number;
+    ProductName: string;
+    ReceiptID: number;
+    CompletionPictureID: number;
+    PerformanceCreditID: number;
+    CreatorUid: number;
+    CreatorName: string;
+    CreatorPhone: string;
+    LastModified: TTimestamp;
+};
+
 export default class detail extends wepy.page {
     api = API;
     config = {
@@ -140,8 +172,13 @@ export default class detail extends wepy.page {
 
     productionList: ProductionContents;
     designList: DesignContents;
+    receivingDeliveryList: ReceivingDeliveryContents;
+    settleList: SettlementContents;
+
     pid: number;
     recordID: number;
+
+
 
     onLoad() {
         this.initData();
@@ -153,19 +190,25 @@ export default class detail extends wepy.page {
         console.log('Material getCurrentPages', getCurrentPages());
         this.pid = parseInt(getCurrentPages()[getCurrentPages().length - 1].options.Pid);
         this.recordID = parseInt(getCurrentPages()[getCurrentPages().length - 1].options.RecordID);
-
         this.api.EndPoint.Project.Production.GetProductionContent(this.pid).then(
             iSuccess => {
                 console.log('this.recordID', this.recordID);
                 this.productionList = iSuccess.Result.ProductionContents.filter(x => x.RecordID === this.recordID)[0];
-                console.log('this.list', this.productionList);
+                console.log('this.productionList', this.productionList);
             }
-        ).catch()
+        ).catch((iFailure: IFailure) => { console.log(`请求生产数据出错,原因:${iFailure.Reason}`); })
+
         this.api.EndPoint.Project.Design.GetDesignContent(this.pid).then(
             iSuccess => {
                 this.designList = iSuccess.Result.DesignContents.filter(x => x.RecordID === this.recordID)[0];
             }
-        ).catch()
+        ).catch((iFailure: IFailure) => { console.log(`请求设计数据出错,原因:${iFailure.Reason}`); })
+
+        this.api.EndPoint.Project.Settlement.GetSettlementContent(this.pid).then(
+            iSuccess => {
+                this.settleList = iSuccess.Result.SettlementContents.filter(x => x.RecordID === this.recordID)[0];
+            }
+        )
 
         wepy.getSystemInfo().then(res => {
             this.sliderLeft = (res.windowWidth / this.tabs.length - this.sliderWidth) / 2
@@ -175,8 +218,8 @@ export default class detail extends wepy.page {
         console.log('this.data', this.data);
     }
     tabClick(e) {
-        this.sliderOffset = e.currentTarget.offsetLeft,
-            this.activeIndex = e.currentTarget.id
+        this.sliderOffset = e.currentTarget.offsetLeft;
+        this.activeIndex = e.currentTarget.id;
     }
 
     preview(e) {

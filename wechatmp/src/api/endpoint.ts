@@ -106,7 +106,10 @@ interface IEndPointScanReceivingReturn {
     Addition: {};
 }
 export class ApiEndPoint {
-    constructor(private api: ApiService, public Project: ApiProject) { }
+    constructor(
+        private api: ApiService,
+        public Project: ApiProject
+    ) { }
 
     GetProjects(): Promise<IEndPointGetProjectsReturn> {
         return this.api.JSON('/endpoint/getprojects', {});

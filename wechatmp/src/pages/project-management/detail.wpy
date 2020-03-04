@@ -40,7 +40,7 @@ padding-0 {
             >
                 <view
                     id="{{index}}"
-                    class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}"
+                    class="weui-navbar__item {{activeIndex != index ? '' : 'weui-bar__item_on'}}"
                     bindtap="tabClick"
                 >
                     <view class="weui-navbar__title">{{item}}</view>
@@ -222,6 +222,7 @@ padding-0 {
                             <view class="td">操作icon</view>
                         </view>
                     </block>
+
                     <block>
                         <view class="tr bg-g">
                             <view class="td">图纸</view>
@@ -244,18 +245,6 @@ padding-0 {
                         <view class="tr bg-g">
                             <view class="td">材料部确认</view>
                             <view class="td">状态icon</view>
-                        </view>
-                    </block>
-                    <block>
-                        <view class="tr bg-g">
-                            <view class="td">设计院确认</view>
-                            <view class="td">状态icon</view>
-                        </view>
-                    </block>
-                    <block>
-                        <view class="tr bg-g">
-                            <view class="td">方案</view>
-                            <view class="td"><text class="iconfont icon-preview"></view>
                         </view>
                     </block>
                     <block>
@@ -298,17 +287,23 @@ padding-0 {
                             ><text class="iconfont icon-history"></text></view>
                         </view>
                     </block>
+
                 </scroll-view>
             </view>
             <view
                 class="weui-tab__content"
-                style="padding: 26rpx 0 0 0;"
                 hidden="{{activeIndex != 1}}"
             >
                 <scroll-view
                     scroll-y="true"
                     style="height: 950rpx;"
                 >
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">产品名称</view>
+                            <view class="td">{{productionList.PName}}</view>
+                        </view>
+                    </block>
                     <block>
                         <view class="tr bg-g">
                             <view class="td">产品名称</view>
@@ -383,17 +378,124 @@ padding-0 {
                             <view class="td"><text class="iconfont icon-preview"></text></view>
                         </view>
                     </block>
-
                 </scroll-view>
             </view>
             <view
                 class="weui-tab__content"
                 hidden="{{activeIndex != 2}}"
-            >选项三的内容</view>
+            >
+                <scroll-view
+                    scroll-y="true"
+                    style="height: 950rpx;"
+                >
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">产品名称</view>
+                            <view class="td">{{receivingDeliveryList.PName}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">数量</view>
+                            <view class="td">{{receivingDeliveryList.number}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">发货总数量</view>
+                            <view class="td">{{receivingDeliveryList.DeliveryAmount}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">收货总数量</view>
+                            <view class="td">{{receivingDeliveryList.ReceivingAmount}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">加工单位未发数量</view>
+                            <view class="td">{{receivingDeliveryList.UnDeliveryAmount}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">现场未发数量</view>
+                            <view class="td">{{receivingDeliveryList.UnReceivingAmount}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">现场备注</view>
+                            <view class="td">{{receivingDeliveryList.Comment}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">操作时间</view>
+                            <view class="td">{{receivingDeliveryList.LastModified}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">操作记录</view>
+                            <view class="td"><text class="iconfont icon-history"></text></view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </view>
             <view
                 class="weui-tab__content"
                 hidden="{{activeIndex != 3}}"
-            >选项四的内容</view>
+            >
+                <scroll-view
+                    scroll-y="true"
+                    style="height: 950rpx;"
+                >
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">产品名称</view>
+                            <view class="td">{{settleList.ProductName}}</view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">收货单</view>
+                            <view class="td"><text class="iconfont icon-preview"></view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">到货清单</view>
+                            <view class="td"><text class="iconfont icon-preview"></view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">完工效果图</view>
+                            <view class="td"><text class="iconfont icon-preview"></view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">履约信用证明书</view>
+                            <view class="td"><text class="iconfont icon-preview"></view>
+                        </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">操作时间</view>
+                            <view class="td">{{settleList.LastModified}}/view>
+                            </view>
+                    </block>
+                    <block>
+                        <view class="tr bg-g">
+                            <view class="td">操作记录</view>
+                            <view class="td"><text class="iconfont icon-history"></text></view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </view>
         </view>
     </view>
 </template>
