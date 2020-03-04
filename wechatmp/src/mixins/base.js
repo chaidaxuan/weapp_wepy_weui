@@ -28,4 +28,7 @@ export default class baseMixin extends wepy.mixin {
             showCancel: false
         }, param))
     }
+    isPhone(str) {
+        return /^1\d{10}$/.test(str)
+    }
 }

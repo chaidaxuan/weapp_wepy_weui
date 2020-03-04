@@ -28,6 +28,8 @@ export default class pageRegister extends wepy.page {
             return +this.time > 0 ? `${this.time}s后重新获取` : '获取验证码'
         }
     }
+    phone: string;
+    password: string;
 
     onShow() {
         this.api.Auth.IsLoggedIn().then(iSuccess => {
@@ -38,32 +40,33 @@ export default class pageRegister extends wepy.page {
         }).catch((iFailure: IFailure) => {
             this.api.log('login/ngOnInit', iFailure);
         });
-        this.api.Auth.Login('18521519605', '123456').then(iSuccess => {
+    }
+    login(evt?: event) {
+        const e = evt as any;
+        debugger
+        this.api.Auth.Login(this.phone, this.password).then(() => {
+            debugger
             wepy.switchTab({ url: '/pages/project-management/projectList' });
+            debugger
         }).catch(() => {
         })
-
     }
     methods = {
-        login(evt?: event) {
-            const e = evt as any;
-            // this.$get({
-            //     url: 'https://paula.eigenvr.com/api/auth/login',
-            //     headers: 'application/json',
-            //     data: { Phone: '18521519605', Password: '123456' }
-            // }, {
-            //     success: ({ code, data }) => {
-            //         wepy.switchTab({ url: '/pages/project-management/projectList' });
-            //         console.log(data);
-            //     },
-            //     fail: ({ code, data }) => {
-            //         console.log(data);
-            //     }
-            // }
-            // )
+        // this.$get({
+        //     url: 'https://paula.eigenvr.com/api/auth/login',
+        //     headers: 'application/json',
+        //     data: { Phone: '18521519605', Password: '123456' }
+        // }, {
+        //     success: ({ code, data }) => {
+        //         wepy.switchTab({ url: '/pages/project-management/projectList' });
+        //         console.log(data);
+        //     },
+        //     fail: ({ code, data }) => {
+        //         console.log(data);
+        //     }
+        // }
+        // )
 
-
-        },
         switchTabToProjectList() {
             wepy.switchTab({ url: '/pages/project-management/projectList' });
         },
@@ -76,7 +79,7 @@ export default class pageRegister extends wepy.page {
             this.$route('navigateTo', '/pages/register');
         },
         toResetPassword() {
-            this.$route('navigateTo', '/pages/forgetPassword', { phone: 18521519605 });
+            this.$route('navigateTo', '/pages/forgetPassword');
         }
     }
 

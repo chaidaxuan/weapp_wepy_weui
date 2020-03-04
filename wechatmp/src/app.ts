@@ -13,6 +13,7 @@ export default class extends wepy.app {
 
             'pages/auth/modifyInfo',
             'pages/auth/resetPassword',
+            'pages/auth/forgetPassword',
             'pages/auth/logout',
             'pages/auth/login',
             'pages/auth/register',

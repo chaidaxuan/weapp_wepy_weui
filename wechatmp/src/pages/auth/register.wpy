@@ -1,59 +1,99 @@
 <style lang="less">
+.login-btn {
+  float: right;
+  margin-right: 20rpx;
+}
+view {
+  padding: 10rpx;
+}
 </style>
 <template>
-<view class="page">
-<view class="weui-cells__title">表单</view>
-<view class="weui-cells weui-cells_after-title">
-    <form class="head-form" bindsubmit="formSubmit">
-    <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">公司</view>
+    <view>
+        <view class="weui-cells__title">登录</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">公司</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input
+                        class="weui-input"
+                        name="company"
+                        @input="typing('company')"
+                        placeholder="请输入公司名称"
+                    />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input
+                        class="weui-input"
+                        name="name"
+                        @input="typing('name')"
+                        placeholder="请输入你的姓名"
+                    />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">手机</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input
+                        class="weui-input"
+                        value="{{phone}}"
+                        name="phone"
+                        @input="typing('phone')"
+                        type="number"
+                        maxlength="11"
+                        placeholder="请输入手机号"
+                    />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell__ft">
+                <view
+                    @tap="verify"
+                    class="weui-vcode-btn "
+                    style="margin-left:240rpx;border-left:0rpx"
+                >{{btnText}}</view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode ">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">验证码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input
+                        class="weui-input"
+                        name="verifyCode"
+                        @input="typing('verifyCode')"
+                        maxlength="6"
+                        placeholder="请输入6位验证码"
+                    />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">密码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input
+                        class="weui-input"
+                        name="password"
+                        @input="typing('password')"
+                        type="password"
+                        placeholder="请输入密码"
+                    />
+                </view>
+            </view>
         </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" name="company"   placeholder="请输入公司名称"/>
-        </view>
+        <button
+            class="green-btn weui-btn"
+            @tap="register"
+        >注册</button>
     </view>
-   <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">姓名</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" name="name" placeholder="请输入你的姓名"/>
-        </view>
-    </view>
-    <view class="weui-cell weui-cell_input weui-cell_vcode">
-        <view class="weui-cell__hd">
-            <view class="weui-label">手机</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" value="{{phone}}" name="phone"  @input="typing('phone')" type="number" maxlength="11" placeholder="请输入手机号" />
-        </view>
-        <view class="weui-cell__ft">
-             <view @tap="verify" class="weui-vcode-btn">{{btnText}}</view>
-        </view>
-    </view>
-    
-    <view class="weui-cell weui-cell_input weui-cell_vcode">
-        <view class="weui-cell__hd">
-            <view class="weui-label" >验证码</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" name="verifyCode" maxlength="6" placeholder="请输入6位验证码" />
-        </view>
-    </view>
-        <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">密码</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" name="password" type="password" placeholder="请输入密码"/>
-        </view>
-    </view>
-    <button formType="submit" class="weui-btn" type="primary" >注册</button>
-     </form>  
-   
-</view>
-</view>
 </template>
 <script lang="typescript" src="./register.ts">
 </script>

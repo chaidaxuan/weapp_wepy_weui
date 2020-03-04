@@ -45,7 +45,6 @@ export class ApiAuth {
             const ret = iSuccess as IAuthLoginReturn;
             this.api.credential = { uid: ret.Result.Uid, token: ret.Result.Token };
             console.log('ret', ret);
-            NotifyUserRoleChange();
         }) as Promise<IAuthLoginReturn>;
     }
 
@@ -62,7 +61,6 @@ export class ApiAuth {
                     uid: ret.Result.Uid,
                     token: ret.Result.Token
                 };
-                NotifyUserRoleChange();
             }) as Promise<IAuthRegisterReturn>;
     }
 
@@ -79,7 +77,6 @@ export class ApiAuth {
                     uid: ret.Result.Uid,
                     token: ret.Result.Token
                 };
-                NotifyUserRoleChange();
             }) as Promise<IAuthResetPasswordReturn>;
     }
 

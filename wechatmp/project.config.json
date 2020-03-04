@@ -97,18 +97,39 @@
 					"id": -1,
 					"name": "pages/project-management/projectListHistory",
 					"pathName": "pages/project-management/projectListHistory",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
 					"name": "pages/scan-management/delete",
 					"pathName": "pages/scan-management/delete",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
 					"name": "项目详情",
 					"pathName": "pages/project-management/project-detail/projectDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/auth/register",
+					"pathName": "pages/auth/register",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/auth/register",
+					"pathName": "pages/auth/register",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/auth/forgetPassword",
+					"pathName": "pages/auth/forgetPassword",
 					"scene": null
 				}
 			]

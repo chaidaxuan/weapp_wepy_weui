@@ -21,7 +21,7 @@ view {
 </style>
 <template>
     <view>
-        <view class="weui-cells__title">表单</view>
+        <view class="weui-cells__title">登录</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
@@ -47,6 +47,7 @@ view {
                     <input
                         class="weui-input"
                         name="password"
+                        @input="typing('password')"
                         type="password"
                         placeholder="请输入密码"
                     />
@@ -55,7 +56,7 @@ view {
         </view>
         <view class="navigateWrap">
             <navigator
-                url="/pages/auth/resetPassword"
+                url="/pages/auth/forgetPassword"
                 hover-class="weui-cell_active"
             >
                 忘记密码？
