@@ -1,7 +1,7 @@
 import wepy from "wepy";
 import { API, TProductionPerformanceStatus, TReceivingDeliveryStatus } from "../../api.service";
 import { IEndPointScanProductionPerformanceRequest } from "../../api/endpoint";
-import { ScanOperation } from "../../api/constants";
+import { ScanOperation, TRollbackOperation } from "../../api/constants";
 import { IFailure } from "../../api/api";
 
 export type listData = {
@@ -85,11 +85,12 @@ export default class scan extends wepy.page {
             };
             this.BarcodeOperations.push(temp);
         });
-        console.log('this.pendingBarcode', this.pendingBarcode);
+
+        let pendingBarcode: string[] = [];
+        this.data.pendingBarcode.forEach(barCode => { pendingBarcode.push(barCode) });
 
         if (this.operation === ScanOperation.DELIVERY) {
-            let pendingBarcode: string[] = [];
-            this.data.pendingBarcode.forEach(barCode => { pendingBarcode.push(barCode) });
+
             this.api.EndPoint.ScanDelivery(pendingBarcode).then(
                 iSuccess => {
                     wepy.showToast({ title: '发货成功', icon: 'success' });
@@ -101,8 +102,7 @@ export default class scan extends wepy.page {
                 }
             )
         } else if (this.operation === ScanOperation.RECEIPT) {
-            let pendingBarcode: string[] = [];
-            this.data.pendingBarcode.forEach(barCode => { pendingBarcode.push(barCode) });
+
             this.api.EndPoint.ScanReceiving(pendingBarcode).then(
                 iSuccess => {
                     wepy.showToast({ title: '收货成功', icon: 'success' });
@@ -113,6 +113,29 @@ export default class scan extends wepy.page {
                     wepy.showModal({ title: '收货失败', content: `原因${iFailure.Reason}`, cancelText: '确定' });
                 }
             )
+        } else if (this.operation === ScanOperation.ROLLBACK_MODIFY_PRODUCTION || this.operation === ScanOperation.ROLLBACK_REPRODUCTION) {
+
+            if (this.operation === ScanOperation.ROLLBACK_MODIFY_PRODUCTION) {
+                this.api.EndPoint.ScanRollback(pendingBarcode, TRollbackOperation.MODIFYPRODUCE).then(
+                    iSuccess => {
+                        wepy.showToast({ title: '重新生产成功', icon: 'success' });
+                        wepy.switchTab({ url: '/pages/index' });
+                    }
+                ).catch((iFailure: IFailure) => {
+                    wepy.showModal({ title: '重新生产失败', content: `原因${iFailure.Reason}`, cancelText: '确定' });
+                })
+            }
+            if (this.operation === ScanOperation.ROLLBACK_REPRODUCTION) {
+                this.api.EndPoint.ScanRollback(pendingBarcode, TRollbackOperation.REPRODUCE).then(
+                    iSuccess => {
+                        wepy.showToast({ title: '修改生产成功', icon: 'success' });
+                        wepy.switchTab({ url: '/pages/index' });
+                    }
+                ).catch((iFailure: IFailure) => {
+                    wepy.showModal({ title: '修改生产失败', content: `原因${iFailure.Reason}`, cancelText: '确定' });
+                })
+            }
+
         } else {
             this.api.EndPoint.ScanProductionPerformance(this.BarcodeOperations).then(
                 iSuccess => {

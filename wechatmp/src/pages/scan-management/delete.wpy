@@ -40,7 +40,7 @@ view {
   justify-content: center;
 }
 .btn-wrap > button {
-  width: 200rpx;
+  width: 215rpx;
 }
 .weui-btn:first-child {
   margin-top: 15px;
@@ -106,7 +106,7 @@ view {
             <button
                 class="green-btn weui-btn"
                 @tap="onDelete"
-            >提交删除</button>
+            >确认</button>
         </view>
 
         <modal

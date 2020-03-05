@@ -161,6 +161,8 @@ export default class detail extends wepy.page {
         list: '',
         designList: [],
         productionList: [],
+        receivingDeliveryList: [],
+        settleList: [],
         pid: -1,
         recordID: -1
     }
@@ -190,25 +192,35 @@ export default class detail extends wepy.page {
         console.log('Material getCurrentPages', getCurrentPages());
         this.pid = parseInt(getCurrentPages()[getCurrentPages().length - 1].options.Pid);
         this.recordID = parseInt(getCurrentPages()[getCurrentPages().length - 1].options.RecordID);
-        this.api.EndPoint.Project.Production.GetProductionContent(this.pid).then(
-            iSuccess => {
-                console.log('this.recordID', this.recordID);
-                this.productionList = iSuccess.Result.ProductionContents.filter(x => x.RecordID === this.recordID)[0];
-                console.log('this.productionList', this.productionList);
-            }
-        ).catch((iFailure: IFailure) => { console.log(`请求生产数据出错,原因:${iFailure.Reason}`); })
-
+        //设计
         this.api.EndPoint.Project.Design.GetDesignContent(this.pid).then(
             iSuccess => {
                 this.designList = iSuccess.Result.DesignContents.filter(x => x.RecordID === this.recordID)[0];
             }
         ).catch((iFailure: IFailure) => { console.log(`请求设计数据出错,原因:${iFailure.Reason}`); })
 
+
+        //生产
+        this.api.EndPoint.Project.Production.GetProductionContent(this.pid).then(
+            iSuccess => {
+                this.productionList = iSuccess.Result.ProductionContents.filter(x => x.RecordID === this.recordID)[0];
+            }
+        ).catch((iFailure: IFailure) => { console.log(`请求生产数据出错,原因:${iFailure.Reason}`); })
+
+        //收发货
+        this.api.EndPoint.Project.ReceivingDelivery.GetReceivingDeliveryContent(this.pid).then(
+            iSuccess => {
+                this.receivingDeliveryList = iSuccess.Result.ReceivingDeliveryContents.filter(x => x.RecordID === this.recordID)[0];
+            }
+        ).catch((iFailure: IFailure) => { console.log(`请求收发货数据出错,原因:${iFailure.Reason}`); })
+
+        //结算
         this.api.EndPoint.Project.Settlement.GetSettlementContent(this.pid).then(
             iSuccess => {
                 this.settleList = iSuccess.Result.SettlementContents.filter(x => x.RecordID === this.recordID)[0];
             }
         )
+
 
         wepy.getSystemInfo().then(res => {
             this.sliderLeft = (res.windowWidth / this.tabs.length - this.sliderWidth) / 2

@@ -96,7 +96,7 @@ export enum TProductionPerformanceStatus {
 }
 export enum ScanOperation {
     DELIVERY = 10,                   // 发货
-    RECEIPT = 11,                    // 到货货
+    RECEIPT = 11,                    // 到货
     ROLLBACK_MODIFY_PRODUCTION = 12, // 回退-修改生产
     ROLLBACK_REPRODUCTION = 13,      // 回退-重新生产
 }

@@ -11,6 +11,11 @@
   // height: 3rem;
   align-items: center;
 }
+.weui-navbar__slider {
+  background-color: #049bff;
+  width: 5em;
+  height: 1rpx;
+}
 .td {
   width: 40%;
   justify-content: center;
@@ -277,7 +282,7 @@ padding-0 {
                             <view class="td">{{designList.LastModified}}</view>
                         </view>
                     </block>
-                    <block>
+                    <!-- <block>
                         <view class="tr bg-g">
                             <view class="td">操作记录</view>
                             <view
@@ -286,7 +291,7 @@ padding-0 {
                                 data-item="{{designList}}"
                             ><text class="iconfont icon-history"></text></view>
                         </view>
-                    </block>
+                    </block> -->
 
                 </scroll-view>
             </view>
@@ -301,13 +306,7 @@ padding-0 {
                     <block>
                         <view class="tr bg-g">
                             <view class="td">产品名称</view>
-                            <view class="td">{{productionList.PName}}</view>
-                        </view>
-                    </block>
-                    <block>
-                        <view class="tr bg-g">
-                            <view class="td">产品名称</view>
-                            <view class="td">{{productionList.PName}}</view>
+                            <view class="td">{{productionList.ProductName}}</view>
                         </view>
                     </block>
                     <block>
@@ -362,7 +361,7 @@ padding-0 {
                             <view class="td"><text class="iconfont icon-preview"></text></view>
                         </view>
                     </block>
-                    <block>
+                    <!-- <block>
                         <view class="tr bg-g">
                             <view class="td">操作记录</view>
                             <view
@@ -371,7 +370,7 @@ padding-0 {
                                 data-item="{{productionList}}"
                             ><text class="iconfont icon-history"></text></view>
                         </view>
-                    </block>
+                    </block> -->
                     <block>
                         <view class="tr bg-g">
                             <view class="td">签证单据</view>
@@ -391,13 +390,13 @@ padding-0 {
                     <block>
                         <view class="tr bg-g">
                             <view class="td">产品名称</view>
-                            <view class="td">{{receivingDeliveryList.PName}}</view>
+                            <view class="td">{{receivingDeliveryList.ProductName}}</view>
                         </view>
                     </block>
                     <block>
                         <view class="tr bg-g">
                             <view class="td">数量</view>
-                            <view class="td">{{receivingDeliveryList.number}}</view>
+                            <view class="td">{{receivingDeliveryList.Amount}}</view>
                         </view>
                     </block>
                     <block>
@@ -436,12 +435,12 @@ padding-0 {
                             <view class="td">{{receivingDeliveryList.LastModified}}</view>
                         </view>
                     </block>
-                    <block>
+                    <!-- <block>
                         <view class="tr bg-g">
                             <view class="td">操作记录</view>
                             <view class="td"><text class="iconfont icon-history"></text></view>
                         </view>
-                    </block>
+                    </block> -->
                 </scroll-view>
             </view>
             <view
@@ -461,39 +460,39 @@ padding-0 {
                     <block>
                         <view class="tr bg-g">
                             <view class="td">收货单</view>
-                            <view class="td"><text class="iconfont icon-preview"></view>
+                            <view class="td"><text class="iconfont icon-preview"></text></view>
                         </view>
                     </block>
                     <block>
                         <view class="tr bg-g">
                             <view class="td">到货清单</view>
-                            <view class="td"><text class="iconfont icon-preview"></view>
+                            <view class="td"><text class="iconfont icon-preview"></text></view>
                         </view>
                     </block>
                     <block>
                         <view class="tr bg-g">
                             <view class="td">完工效果图</view>
-                            <view class="td"><text class="iconfont icon-preview"></view>
+                            <view class="td"><text class="iconfont icon-preview"></text></view>
                         </view>
                     </block>
                     <block>
                         <view class="tr bg-g">
                             <view class="td">履约信用证明书</view>
-                            <view class="td"><text class="iconfont icon-preview"></view>
+                            <view class="td"><text class="iconfont icon-preview"></text></view>
                         </view>
                     </block>
                     <block>
                         <view class="tr bg-g">
                             <view class="td">操作时间</view>
-                            <view class="td">{{settleList.LastModified}}/view>
-                            </view>
+                            <view class="td">{{settleList.LastModified}}</view>
+                        </view>
                     </block>
-                    <block>
+                    <!-- <block>
                         <view class="tr bg-g">
                             <view class="td">操作记录</view>
                             <view class="td"><text class="iconfont icon-history"></text></view>
                         </view>
-                    </block>
+                    </block> -->
                 </scroll-view>
             </view>
         </view>

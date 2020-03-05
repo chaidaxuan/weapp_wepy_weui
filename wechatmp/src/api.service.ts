@@ -14,6 +14,8 @@ import { ApiDesign } from './api/endpoint/project/design';
 import { ApiProduction } from './api/endpoint/project/production';
 import { ApiProjectUser } from './api/endpoint/project/projectuser';
 import { HttpClient } from './http';
+import { ApiReceivingDelivery } from './api/endpoint/project/receivingdelivery';
+import { ApiSettlement } from './api/endpoint/project/settlement';
 
 /**
  * Example
@@ -51,10 +53,19 @@ const apiService = new ApiService(new HttpClient());
 const apiAuth = new ApiAuth(apiService);
 const apiProject = new ApiProject(
   apiService,
-  new ApiDesign(apiService),
-  new ApiProjectUser(apiService),
   new ApiProduction(apiService),
+  new ApiDesign(apiService),
+  new ApiReceivingDelivery(apiService),
+  new ApiProjectUser(apiService),
+  new ApiSettlement(apiService)
 );
+
+// public File: ApiFile,
+// public Auth: ApiAuth,
+// public Admin: ApiAdmin,
+// public ProjectAccount: ApiProjectAccount,
+// public Profile: ApiProfile,
+// public EndPoint: ApiEndPoint,
 
 export const API = new APIConstructor(
   new ApiFile(apiService),

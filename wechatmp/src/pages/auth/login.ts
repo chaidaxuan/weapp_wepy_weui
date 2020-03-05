@@ -43,11 +43,8 @@ export default class pageRegister extends wepy.page {
     }
     login(evt?: event) {
         const e = evt as any;
-        debugger
         this.api.Auth.Login(this.phone, this.password).then(() => {
-            debugger
             wepy.switchTab({ url: '/pages/project-management/projectList' });
-            debugger
         }).catch(() => {
         })
     }

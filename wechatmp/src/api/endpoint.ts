@@ -1,5 +1,5 @@
 import { ApiService } from './api';
-import { TProjectStatus, TProductionPerformanceStatus, TReceivingDeliveryStatus } from './constants';
+import { TProjectStatus, TProductionPerformanceStatus, TReceivingDeliveryStatus, TRollbackOperation } from './constants';
 
 import { ApiProject } from './endpoint/project';
 
@@ -105,6 +105,15 @@ interface IEndPointScanReceivingReturn {
     };
     Addition: {};
 }
+interface IEndPointScanRollbackReturn {
+    Result: {
+        InvalidBarcodeOperations: {
+            Barcode: string;
+            Reason: string;
+        }[];
+    };
+    Addition: {};
+}
 export class ApiEndPoint {
     constructor(
         private api: ApiService,
@@ -142,6 +151,11 @@ export class ApiEndPoint {
     // 收货扫码
     ScanReceiving(Barcode: string[]): Promise<IEndPointScanReceivingReturn> {
         return this.api.JSON('/endpoint/scanreceiving', { Barcode });
+    }
+
+    // 回退扫码
+    ScanRollback(Barcode: string[], Operation: TRollbackOperation): Promise<IEndPointScanRollbackReturn> {
+        return this.api.JSON('/endpoint/scanrollback', { Barcode, Operation });
     }
 
 }
