@@ -24,12 +24,12 @@
 
   // text + space + text
   .userinfo-nickname {
-    color: #5cbaa7;
+    color: #049bff;
     font-size: (100 - 4 * 8) * (16 / 30) rpx;
     margin-bottom: 2 * 8rpx;
   }
   .userinfo-status {
-    color: #999;
+    color: #049bff;
     font-size: (100 - 4 * 8) * (14 / 30) rpx;
   }
 }
@@ -41,11 +41,15 @@
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd userinfo clearfix">
-            <image
-              class="userinfo-avatar"
+            <!-- <image
+             
               src="{{userInfo.avatarUrl}}"
               background-size="cover"
-            />
+            /> -->
+            <open-data
+              class="userinfo-avatar"
+              type="userAvatarUrl"
+            ></open-data>
             <view class="userinfo-info">
               <view class="userinfo-nickname">姓名:{{userInfo.nickName}}</view>
               <view class="userinfo-status">身份:{{userInfo.role}}</view>
@@ -83,6 +87,7 @@
           <view class="weui-cell__ft weui-cell__ft_in-access">
           </view>
         </navigator>
+
       </view>
     </view>
   </view>

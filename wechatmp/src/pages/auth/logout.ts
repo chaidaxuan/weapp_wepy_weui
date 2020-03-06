@@ -1,4 +1,5 @@
-import wepy from "wepy"; import { API } from "../../api.service";
+import wepy from "wepy";
+import { API } from "../../api.service";
 ;
 export default class pageLogout extends wepy.page {
     api = API;
@@ -15,6 +16,6 @@ export default class pageLogout extends wepy.page {
 
     }
     onShow(options) {
-        this.api.Profile.Logout().finally(() => this.$route('navigateTo', '/pages/index'));
+        this.api.Profile.Logout().finally(() => wepy.switchTab({ url: '/pages/index' }));
     }
 }

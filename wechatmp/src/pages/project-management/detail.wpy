@@ -231,7 +231,11 @@ padding-0 {
                     <block>
                         <view class="tr bg-g">
                             <view class="td">图纸</view>
-                            <view class="td"><text class="iconfont icon-preview"></text></view>
+                            <view
+                                class="td"
+                                data-item="{{designList}}"
+                                @tap="preview"
+                            ><text class="iconfont icon-preview"></text></view>
                         </view>
                     </block>
                     <block>

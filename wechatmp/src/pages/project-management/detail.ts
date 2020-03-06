@@ -1,6 +1,6 @@
 import wepy from "wepy";
 import { API, TTimestamp, TVerifyStatus } from "../../api.service";
-import { IFailure } from "../../api/api";
+import { IFailure, PromptDownloadFile } from "../../api/api";
 
 export type ProductionContents = {
     Id: number;
@@ -235,21 +235,22 @@ export default class detail extends wepy.page {
     }
 
     preview(e) {
-        // let Id = e.currentTarget.dataset.item.Id;
-        // this.api.EndPoint.Project.Production.DownloadCertificate(this.pid, Id).then(
-        //     res => {
-        //         let fileBlob = res.Blob;
-        //         wx.openDocument({
-        //             filePath: '',
-        //             success: function () {
+        let Id = e.currentTarget.dataset.item.DrawingID;
+        this.api.EndPoint.Project.Production.DownloadCertificate(this.pid, Id).then(
+            res => {
+                let fileBlob = res.Blob;
+                PromptDownloadFile(res.Blob, 'Filename');
+                // wx.openDocument({
+                //     filePath: '',
+                //     success: function () {
 
-        //             }
-        //         })
-        //     }
-        // ).catch((iFailure: IFailure) => {
-        //     console.log(`文件下载失败：原因${iFailure.Reason}`);
-        // }
-        // )
+                //     }
+                // })
+            }
+        ).catch((iFailure: IFailure) => {
+            console.log(`文件下载失败：原因${iFailure.Reason}`);
+        }
+        )
     }
 
 }

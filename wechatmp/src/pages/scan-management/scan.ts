@@ -76,8 +76,6 @@ export default class scan extends wepy.page {
         this.scanInterval = null;
     }
     onConfirm() {
-        // if (this.operation)
-        console.log('this.pendingBarcode', this.pendingBarcode, 'this.data.pendingBarcode', this.data.pendingBarcode);
         this.data.pendingBarcode.forEach(barCode => {
             let temp = {
                 "Barcode": barCode,
@@ -128,8 +126,13 @@ export default class scan extends wepy.page {
             if (this.operation === ScanOperation.ROLLBACK_REPRODUCTION) {
                 this.api.EndPoint.ScanRollback(pendingBarcode, TRollbackOperation.REPRODUCE).then(
                     iSuccess => {
-                        wepy.showToast({ title: '修改生产成功', icon: 'success' });
-                        wepy.switchTab({ url: '/pages/index' });
+                        if (iSuccess.Result.InvalidBarcodeOperations) {
+
+                            wepy.showModal({ title: '修改生产成功', content: `以下条形码未成功`, confirmText: '确定' });
+                        } else {
+                            wepy.showModal({ title: '修改生产成功', content: '', confirmText: '确定' });
+                            wepy.switchTab({ url: '/pages/index' });
+                        }
                     }
                 ).catch((iFailure: IFailure) => {
                     wepy.showModal({ title: '修改生产失败', content: `原因${iFailure.Reason}`, cancelText: '确定' });
@@ -139,7 +142,16 @@ export default class scan extends wepy.page {
         } else {
             this.api.EndPoint.ScanProductionPerformance(this.BarcodeOperations).then(
                 iSuccess => {
-                    wepy.showToast({ title: '设置生产动态成功', icon: 'success' });
+                    let content = ''
+                    if (iSuccess.Result.InvalidBarcodeOperations) {
+                        iSuccess.Result.InvalidBarcodeOperations.forEach(x => {
+                            content += `条码:${x.Barcode}——原因：${x.Reason}\r\n`
+                        })
+                        console.log('content', content);
+                        wepy.showModal({ title: '更新动态成功', content: `以下条形码未成功\r\n${content}`, confirmText: '确定' });
+                    } else {
+                        wepy.showModal({ title: '更新动态成功', content: content, });
+                    }
                     wepy.switchTab({ url: '/pages/index' });
                 }
             ).catch(

@@ -36,10 +36,11 @@ export default class pageUser extends wepy.page {
         ).catch(
 
         )
-        // wepy.getUserInfo({ withCredentials: true, lang: 'en', timeout: 5000 }).then(
-        //     (iSuccess) => {
-        //     }
-        // ).catch()
+        wepy.getUserInfo({ withCredentials: true, lang: 'en', timeout: 5000 }).then(
+            (iSuccess) => {
+                console.log('iSuccess.userInfo', iSuccess.userInfo);
+            }
+        ).catch()
     }
 
     methods = {}
